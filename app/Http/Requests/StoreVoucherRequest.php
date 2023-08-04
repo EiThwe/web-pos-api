@@ -11,7 +11,7 @@ class StoreVoucherRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreVoucherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "customer" => "min:3",
+            "phone" => "min:6",
+            "voucher_records" => "array|required"
         ];
     }
 }

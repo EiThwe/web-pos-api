@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             "total_price" => rand(10000,100000),
             "unit" => "pack",
             "more_information" => fake()->text(),
-            "photo" => fake()->image()
+            "photo" => "https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg"
         ];
     }
 }
