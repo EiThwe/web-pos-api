@@ -17,7 +17,10 @@ class VoucherRecordFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "voucher_id" => rand(1,5),
+            "product_id" => rand(1,20),
+            "quantity" => rand(1,10),
+            "cost" => rand(10000,100000),
         ];
     }
 }
