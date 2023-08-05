@@ -73,7 +73,16 @@ class VoucherController extends Controller
      */
     public function update(UpdateVoucherRequest $request,  $id)
     {
-        //
+        $voucher = Voucher::find($id);
+        $voucher->customer = $request->customer ?? $voucher->customer;
+        $voucher->phone = $request->phone ?? $voucher->phone;
+        $voucher->total = $request->total ?? $voucher->total;
+        $voucher->tax = $request->tax ?? $voucher->tax;
+        $voucher->net_total = $request->net_total ?? $voucher->net_total;
+        $voucher->user_id = Auth::id();
+        $voucher->update();
+
+        return response()->json(["message" => "voucher is updated successfully"]);
     }
 
     /**
