@@ -23,7 +23,11 @@ class UpdateVoucherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "customer" => "min:3",
+            "phone" => "min:6",
+            "net_total" => "numeric",
+            "tax" => "numeric",
+            "total" => "numeric"
         ];
     }
 }
