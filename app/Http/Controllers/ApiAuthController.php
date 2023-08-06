@@ -27,7 +27,8 @@ class apiAuthController extends Controller
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
-            "password" => Hash::make($request->password)
+            "password" => Hash::make($request->password),
+            "user_photo" => $request->user_photo ?  $request->user_photo : config("info.default_user_photo")
         ]);
 
         return response()->json([
@@ -51,8 +52,8 @@ class apiAuthController extends Controller
         $token = Auth::user()->createToken($request->has("device") ? $request->device : 'unknown')->plainTextToken;
         return response()->json([
             "message" => "Login successfully",
-            "user"=> Auth::user(),
-            "token"=>$token
+            "user" => Auth::user(),
+            "token" => $token
         ]);
     }
     public function logout()

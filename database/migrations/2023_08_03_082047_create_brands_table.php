@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("company");
             $table->text("information");
             $table->foreignId("user_id");
-            $table->string("photo");
+            $table->string("photo")->default(config("info.default_photo"));
             $table->timestamps();
         });
     }

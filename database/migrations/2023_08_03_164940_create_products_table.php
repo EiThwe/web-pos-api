@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId("user_id");
             $table->integer("actual_price");
             $table->integer("sale_price");
-            $table->integer("total_price");
+            $table->integer("total_stock");
             $table->string("unit");
             $table->text("more_information");
             $table->string("photo");

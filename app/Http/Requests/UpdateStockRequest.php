@@ -11,7 +11,7 @@ class UpdateStockRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateStockRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "product_id" => "exists:products,id",
+            "quantity" => "numeric",
+            "more_information" => "min:50"
         ];
     }
 }

@@ -11,7 +11,7 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "min:2|max:50",
+            "company" => "min:4|max:50",
+            "information" => "min:50",
         ];
     }
 }
