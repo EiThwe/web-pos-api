@@ -202,3 +202,53 @@ _Only admin can delete_
  http://127.0.0.1:8000/api/v1/stocks/{id}
 ```
 
+### Voucher
+
+__Get Vouchers__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/vouchers?page={id}
+```
+
+__Get Single Voucher__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/vouchers/{id}
+```
+
+__Create Stock__ `POST`
+
+```
+ http://127.0.0.1:8000/api/v1/vouchers
+```
+
+Arguments  |  Type  |  Status | Description 
+-----------|--------|---------|------------
+customer      | string | nullable |Aung Aung(min: 3)
+phone      | integer | nullable |09969969969(min: 6)
+voucher_records   | array | **Required** | [ { product_id, quantity, cost } ]
+
+__Update Stock__ `PUT/PATCH`
+
+```
+ http://127.0.0.1:8000/api/v1/vouchers{id}
+```
+__You can update single parameter or more__
+
+Arguments  |  Type  |  Status | Description 
+-----------|--------|---------|------------
+customer      | string | nullable |Aung Aung(min: 3)
+phone      | integer | nullable |09969969969(min: 6)
+net_total  | numeric | nullable | 100
+tax  | numeric | nullable | 10
+total  | numeric | nullable | 110
+
+
+__Delete Stock__ `DELETE`
+
+_Only admin can delete_
+
+```
+ http://127.0.0.1:8000/api/v1/vouchers/{id}
+```
+
