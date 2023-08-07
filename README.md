@@ -178,29 +178,27 @@ __Create Stock__ `POST`
 Arguments  |  Type  |  Status | Description 
 -----------|--------|---------|------------
 product_id      | integer | **Required** |3
-company      | string | **Required** |MAMA co.ltd
-information   | string | **Required** |min:50
-photo          |url|nullable|default photo
+quantity      | integer | **Required** |10
+more_information   | string | nullable |min:50
 
-__Update Brand__ `PUT/PATCH`
+__Update Stock__ `PUT/PATCH`
 
 ```
- http://127.0.0.1:8000/api/v1/brand/{id}
+ http://127.0.0.1:8000/api/v1/stocks{id}
 ```
 __You can update single parameter or more__
 
 Arguments  |  Type  |  Status | Description 
 -----------|--------|---------|------------
-name      | string | nullable| MAMA 3(min:3)
-company      | string | nullable| MA MA
-information   | string | nullable |min:50
-photo  | url | nullable|default photo
+product_id      | integer | integer |3
+quantity      | integer | integer |10
+more_information   | string | nullable |min:50
 
-__Delete Brand__ `DELETE`
+__Delete Stock__ `DELETE`
 
 _Only admin can delete_
 
 ```
- http://127.0.0.1:8000/api/v1/brand/{id}
+ http://127.0.0.1:8000/api/v1/stocks/{id}
 ```
 
