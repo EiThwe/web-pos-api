@@ -66,7 +66,7 @@ class StockController extends Controller
         $stock->quantity = $request->quantity ?? $stock->quantity;
         $stock->more_information = $request->more_information ?? $stock->more_information;
         $stock->update();
-        
+
         $stock->product->total_stock += $request->quantity;
         $stock->product->save();
         return new StockResource($stock);

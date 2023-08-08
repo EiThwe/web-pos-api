@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("company");
-            $table->text("information");
+            $table->text("information")->nullable();
             $table->foreignId("user_id");
             $table->string("photo")->default(config("info.default_photo"));
             $table->timestamps();

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer("sale_price");
             $table->integer("total_stock");
             $table->string("unit");
-            $table->text("more_information");
+            $table->text("more_information")->nullable();
             $table->string("photo");
             $table->timestamps();
         });

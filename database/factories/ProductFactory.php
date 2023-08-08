@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             "total_stock" => rand(10000, 100000),
             "unit" => "pack",
             "more_information" => fake()->text(),
-            "photo" => "https://www.italiangourmetuk.co.uk/cdn/shop/products/pepsi-soft-drink-pepsi-cola-pet-500ml-29674745168037.jpg?v=1650657442&width=480"
+            "photo" => "https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg"
         ];
     }
 }

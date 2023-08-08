@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\VoucherController;
 use App\Http\Middleware\AddJsonHeaderMiddleware;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -30,10 +31,12 @@ Route::prefix("v1")->group(function () {
         Route::post("logout", [ApiAuthController::class, 'logout']);
         Route::post("logout-all", [ApiAuthController::class, 'logoutAll']);
         Route::get("devices", [ApiAuthController::class, 'devices']);
-
-        Route::apiResource("brand", BrandController::class);
+        // inventory
+        Route::apiResource("brands", BrandController::class);
         Route::apiResource("products", ProductController::class);
         Route::apiResource("stocks", StockController::class);
+        // sale
+        Route::apiResource("vouchers", VoucherController::class);
     });
     Route::post("login", [ApiAuthController::class, 'login']);
 });

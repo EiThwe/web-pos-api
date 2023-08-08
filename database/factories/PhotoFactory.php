@@ -17,7 +17,7 @@ class PhotoFactory extends Factory
     public function definition(): array
     {
         return [
-            "url" => "https://www.mama.co.th/imgadmins/img_product_model/model_ex20170922113523.jpg"
+            "url" => "https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg"
         ];
     }
 }

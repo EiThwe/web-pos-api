@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId("user_id");
             $table->foreignId("product_id");
             $table->integer("quantity");
-            $table->text("more_information");
+            $table->text("more_information")->nullable();
             $table->timestamps();
         });
     }

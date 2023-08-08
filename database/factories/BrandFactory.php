@@ -20,7 +20,8 @@ class BrandFactory extends Factory
             "name" => fake()->sentence(),
             "company" => fake()->sentence(),
             "information" => fake()->text(),
-            "user_id" => rand(1, 5),
+            "user_id" => rand(1,5),
+            "photo" => "https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg"
         ];
     }
 }

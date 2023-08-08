@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateVoucherRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateVoucherRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user()->role == "admin";
     }
 
     /**
@@ -22,7 +23,11 @@ class UpdateVoucherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "customer" => "min:3",
+            "phone" => "min:6",
+            "net_total" => "numeric",
+            "tax" => "numeric",
+            "total" => "numeric"
         ];
     }
 }
