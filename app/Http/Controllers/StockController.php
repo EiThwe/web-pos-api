@@ -17,8 +17,8 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stocks = Stock::latest("id")->paginate(10)->withQueryString();
-        return StockResource::collection($stocks);
+        // $stocks = Stock::latest("id")->paginate(10)->withQueryString();
+        // return StockResource::collection($stocks);
     }
 
     /**
@@ -30,11 +30,11 @@ class StockController extends Controller
             "user_id" => Auth::id(),
             "product_id" => $request->product_id,
             "quantity" => $request->quantity,
-            "more_information" => $request->more_information
+            "more_information" => $request->more_information,
         ]);
         $stock->product->total_stock += $request->quantity;
         $stock->product->save();
-        return new StockResource($stock);
+        return response()->json(["message"=>"A stock is created successfully"]);
     }
 
     /**
@@ -42,13 +42,13 @@ class StockController extends Controller
      */
     public function show(string $id)
     {
-        $stock = Stock::find($id);
-        if (is_null($stock)) {
-            return response()->json([
-                "message" => "Stock not found"
-            ], 404);
-        }
-        return new StockResource($stock);
+        // $stock = Stock::find($id);
+        // if (is_null($stock)) {
+        //     return response()->json([
+        //         "message" => "Stock not found"
+        //     ], 404);
+        // }
+        // return new StockResource($stock);
     }
 
     /**
@@ -56,20 +56,20 @@ class StockController extends Controller
      */
     public function update(UpdateStockRequest $request, string $id)
     {
-        $stock = Stock::find($id);
-        if (is_null($stock)) {
-            return response()->json([
-                "message" => "Stock not found"
-            ], 404);
-        }
-        $stock->product_id = $request->product_id ?? $stock->product_id;
-        $stock->quantity = $request->quantity ?? $stock->quantity;
-        $stock->more_information = $request->more_information ?? $stock->more_information;
-        $stock->update();
+        // $stock = Stock::find($id);
+        // if (is_null($stock)) {
+        //     return response()->json([
+        //         "message" => "Stock not found"
+        //     ], 404);
+        // }
+        // $stock->product_id = $request->product_id ?? $stock->product_id;
+        // $stock->quantity = $request->quantity ?? $stock->quantity;
+        // $stock->more_information = $request->more_information ?? $stock->more_information;
+        // $stock->update();
 
-        $stock->product->total_stock += $request->quantity;
-        $stock->product->save();
-        return new StockResource($stock);
+        // $stock->product->total_stock += $request->quantity;
+        // $stock->product->save();
+        // return new StockResource($stock);
     }
 
     /**

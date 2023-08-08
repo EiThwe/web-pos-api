@@ -74,6 +74,10 @@ class VoucherController extends Controller
     public function update(UpdateVoucherRequest $request,  $id)
     {
         $voucher = Voucher::find($id);
+        if (is_null($voucher)) {
+            return response()->json(["message" => "voucher not found"], 404);
+        };
+
         $voucher->customer = $request->customer ?? $voucher->customer;
         $voucher->phone = $request->phone ?? $voucher->phone;
         $voucher->total = $request->total ?? $voucher->total;

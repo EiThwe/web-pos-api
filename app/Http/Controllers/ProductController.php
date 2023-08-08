@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductDetailResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class ProductController extends Controller
                 "message" => "Product not found"
             ], 404);
         }
-        return new ProductResource($product);
+        return new ProductDetailResource($product);
     }
 
     /**
@@ -73,7 +74,7 @@ class ProductController extends Controller
         $product->unit = $request->unit ?? $product->unit;
         $product->more_information = $request->more_information ?? $product->more_information;
         $product->update();
-        return new ProductResource($product);
+        return response()->json(["message" => "Product is updated successfully"]);
     }
 
     /**

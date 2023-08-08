@@ -21,9 +21,9 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function stock()
+    public function stocks()
     {
-        return $this->hasOne(Stock::class);
+        return $this->hasMany(Stock::class);
     }
 
     public function voucher_records()
