@@ -9,7 +9,7 @@ class VoucherRecord extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["voucher_id", "product_id", "quantity", "cost"];
+    protected $fillable = ["voucher_id", "product_id", "price", "quantity", "cost"];
 
     protected $hidden = ["created_at", "updated_at"];
 

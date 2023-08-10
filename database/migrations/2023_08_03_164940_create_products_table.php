@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string("name");
             $table->foreignId("brand_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId("user_id");
-            $table->integer("actual_price");
-            $table->integer("sale_price");
-            $table->integer("total_stock");
+            $table->double("actual_price");
+            $table->double("sale_price");
+            $table->double("total_stock");
             $table->string("unit");
             $table->text("more_information")->nullable();
             $table->string("photo");

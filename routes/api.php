@@ -37,6 +37,7 @@ Route::prefix("v1")->group(function () {
         Route::apiResource("stocks", StockController::class);
         // sale
         Route::apiResource("vouchers", VoucherController::class);
+        Route::post("checkout", [VoucherController::class, "checkout"]);
     });
     Route::post("login", [ApiAuthController::class, 'login']);
 });
