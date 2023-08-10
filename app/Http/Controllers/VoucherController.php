@@ -6,9 +6,11 @@ use App\Models\Voucher;
 use App\Http\Requests\StoreVoucherRequest;
 use App\Http\Requests\UpdateVoucherRequest;
 use App\Http\Resources\VoucherResource;
+use App\Models\Product;
 use App\Models\VoucherRecord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class VoucherController extends Controller
 {
@@ -40,7 +42,7 @@ class VoucherController extends Controller
             "net_total" => $net_total,
             "tax" => $tax,
             "total" => $total,
-            "voucher_number" => rand(100000, 10000000),
+            "voucher_number" => Str::random(10),
             "user_id" => Auth::id()
         ]);
         $voucher_records = [];
@@ -48,6 +50,11 @@ class VoucherController extends Controller
         foreach ($request->voucher_records as $record) {
             $record["voucher_id"] = $voucher->id;
             array_push($voucher_records, $record);
+
+            $product = Product::find($record['product_id']);
+            $product->total_stock -= $record["quantity"];
+
+            $product->update();
         };
 
         $voucher->voucher_records()->createMany($voucher_records);

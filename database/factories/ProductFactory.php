@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             "user_id" => rand(1, 5),
             "actual_price" => rand(1000, 10000),
             "sale_price" => rand(10000, 100000),
-            "total_stock" => rand(10000, 100000),
+            "total_stock" => 0,
             "unit" => "pack",
             "more_information" => fake()->text(),
             "photo" => "https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg"
