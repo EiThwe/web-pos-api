@@ -52,6 +52,7 @@ Route::prefix("v1")->group(function () {
         Route::get("media",[PhotoController::class,"index"]);
         Route::post("media",[PhotoController::class,"upload"]);
         Route::delete("media/{id}",[PhotoController::class,"destroy"]);
+        Route::post("checkout", [VoucherController::class, "checkout"]);
     });
     Route::post("login", [ApiAuthController::class, 'login']);
 });

@@ -62,6 +62,55 @@ class VoucherController extends Controller
         return response()->json(["message" => "voucher is created successfully"], 201);
     }
 
+    public function checkout(StoreVoucherRequest $request)
+    {
+        $productIds = collect($request->voucher_records)->pluck("product_id");
+        $products = Product::whereIn("id", $productIds)->get();
+        $total = 0;
+
+        foreach ($request->voucher_records as $record) {
+            $total += $record["quantity"] * $products->find($record["product_id"])->sale_price;
+        }
+
+        $tax = $total * 0.05;
+        $net_total = $total + $tax;
+
+        $voucher =  Voucher::create([
+            "customer" => $request->customer ?? "unknown",
+            "phone" => $request->phone ?? "unknown",
+            "voucher_number" => Str::random(10),
+            "total" => $total,
+            "tax" => $tax,
+            "net_total" => $net_total,
+            "user_id" => Auth::id(),
+        ]);
+
+        $records = [];
+
+        foreach ($request->voucher_records as $record) {
+            $currentProduct = $products->find($record["product_id"]);
+
+            $records[] = [
+                "voucher_id" => $voucher->id,
+                "product_id" => $record["product_id"],
+                "price" => $currentProduct->sale_price,
+                "quantity" => $record["quantity"],
+                "cost" => $record["quantity"] * $currentProduct->sale_price,
+                "created_at" => now(),
+                "updated_at" => now()
+            ];
+            Product::where("id", $record["product_id"])->update([
+                "total_stock" => $currentProduct->total_stock - $record["quantity"]
+            ]);
+        }
+
+        VoucherRecord::insert($records);
+
+        
+
+        return new VoucherResource($voucher);
+    }
+
     /**
      * Display the specified resource.
      */
