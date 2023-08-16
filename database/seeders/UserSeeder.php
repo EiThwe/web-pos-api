@@ -17,6 +17,10 @@ class UserSeeder extends Seeder
         //
         User::factory()->create([
             "name" => "Thwe Thwe",
+            "phone" => "09923304045",
+            "address" => "this is address and address",
+            "date_of_birth" => "1/12/2000",
+            "gender" => "female",
             "email" => "tth@gmail.com",
             "password" => Hash::make("11223344"),
             "role" => "admin"

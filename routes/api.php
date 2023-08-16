@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Middleware\AddJsonHeaderMiddleware;
 use App\Models\Brand;
@@ -31,12 +33,25 @@ Route::prefix("v1")->group(function () {
         Route::post("logout", [ApiAuthController::class, 'logout']);
         Route::post("logout-all", [ApiAuthController::class, 'logoutAll']);
         Route::get("devices", [ApiAuthController::class, 'devices']);
+        Route::get("profile", [ApiAuthController::class, 'profile']);
+        Route::post("profile", [ApiAuthController::class, 'profileUpdate']);
+        Route::post("change-password", [ApiAuthController::class, 'changePassword']);
+        //users
+        Route::get("users", [UserController::class, 'users']);
+        Route::get("users/{id}", [UserController::class, 'user']);
+        Route::delete("users/{id}", [UserController::class, 'userDelete']);
+
+
         // inventory
         Route::apiResource("brands", BrandController::class);
         Route::apiResource("products", ProductController::class);
         Route::apiResource("stocks", StockController::class);
         // sale
         Route::apiResource("vouchers", VoucherController::class);
+        //photo
+        Route::get("media",[PhotoController::class,"index"]);
+        Route::post("media",[PhotoController::class,"upload"]);
+        Route::delete("media/{id}",[PhotoController::class,"destroy"]);
     });
     Route::post("login", [ApiAuthController::class, 'login']);
 });

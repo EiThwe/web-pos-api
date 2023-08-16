@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePhotoRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,13 @@ class StorePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-           "photo" =>"required|file|max:1024"
+            "name"=>"min:3",
+            "phone"=>"numeric|min:9",
+            "date_of_birth"=>"date",
+            "gender"=>"exists:user,gender",
+            "address"=>"min:100",
+            "email"=>"email|unique:users",
+            "user_photo"=>"url"
         ];
     }
 }

@@ -4,7 +4,9 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\Photo;
 use App\Models\User;
+use App\Policies\PhotoPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Photo::class => PhotoPolicy::class
     ];
 
     /**
@@ -26,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        Gate::define('isAdmin', function ()  {
+        Gate::define('isAdmin', function () {
             return Auth::user()->role == "admin";
         });
     }
