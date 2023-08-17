@@ -9,5 +9,5 @@ class Photo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["url","name",'ext',"user_id"];
+    protected $fillable = ["url","name",'ext',"user_id","file_size"];
 }

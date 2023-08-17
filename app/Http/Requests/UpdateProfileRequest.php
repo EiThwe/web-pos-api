@@ -25,8 +25,9 @@ class UpdateProfileRequest extends FormRequest
             "name"=>"min:3",
             "phone"=>"numeric|min:9",
             "date_of_birth"=>"date",
-            "gender"=>"exists:user,gender",
-            "address"=>"min:100",
+            "gender" => "in:male,female",
+            "status" => "in:active,ban",
+            "address"=>"min:50",
             "email"=>"email|unique:users",
             "user_photo"=>"url"
         ];

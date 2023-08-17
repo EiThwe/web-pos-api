@@ -26,20 +26,21 @@ class PhotoController extends Controller
      */
     public function upload(StorePhotoRequest $request)
     {
-        //$savedProfilePic = null;
-        // $fileExt = null;
-        // $fileName = null;
+
         if ($request->hasFile('photo')) {
             $fileExt =  $request->file('photo')->extension();
             $fileName = $request->file('photo')->getClientOriginalName();
             $savedPhoto = $request->file("photo")->store("public/media");
+            $fileSizeBytes =  $request->file('photo')->getSize();
         }
+        $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
         $photoUrl = asset(Storage::url($savedPhoto));
 
         $photo = Photo::create([
             "url" => $photoUrl,
             "name" => $fileName,
             "ext" => $fileExt,
+            "file_size"=>$fileSizeMB."MB",
             "user_id" => Auth::id()
         ]);
         return response()->json(["data" => $photo]);

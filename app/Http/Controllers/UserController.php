@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -33,6 +34,27 @@ class UserController extends Controller
             ], 404);
         }
         return response()->json(["user" => $user]);
+    }
+    public function userUpdate(UpdateProfileRequest $request, $id)
+    {
+        if (Gate::denies("isAdmin")) {
+            return response()->json([
+                "message" => "Unauthorized"
+            ]);
+        }
+
+        $user = User::find($id);
+        $user->name = $request->name ?? $user->name;
+        $user->phone = $request->phone ?? $user->phone;
+        $user->date_of_birth = $request->date_of_birth ?? $user->date_of_birth;
+        $user->gender = $request->gender ?? $user->gender;
+        $user->address = $request->address ?? $user->address;
+        $user->email = $request->email ?? $user->email;
+        $user->status = $request->status ?? $user->status;
+        $user->user_photo = $request->user_photo ?? $user->user_photo;
+        $user->update();
+
+        return response()->json(["message" => "User info is updated successfully"]);
     }
     public function userDelete($id)
     {

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("url");
             $table->string("name");
+            $table->string("file_size");
             $table->string('ext');
             $table->foreignId("user_id");
             $table->timestamps();

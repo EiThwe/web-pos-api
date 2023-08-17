@@ -23,8 +23,8 @@ class apiAuthController extends Controller
             "name" => "required|min:3",
             "phone" => "required|numeric|min:9",
             "date_of_birth" => "required|date",
-            "gender" => "required|exists:user,gender",
-            "address" => "required|min:100",
+            "gender" => "required|in:male,female",
+            "address" => "required|min:50",
             "email" => "required|email|unique:users",
             "password" => "required|min:8|confirmed",
             "user_photo" => "url",
@@ -92,13 +92,15 @@ class apiAuthController extends Controller
 
     public function profile()
     {
-        $user = Auth::user();
-        return response()->json(["user_data" => $user]);
+        $id = Auth::id();
+        $user = User::find($id);
+        return response()->json(["user" => $user]);
     }
 
     public function profileUpdate(UpdateProfileRequest $request)
     {
-        $user = Auth::user();
+        $id = Auth::id();
+        $user = User::find($id);
         $user->name = $request->name ?? $user->name;
         $user->phone = $request->phone ?? $user->phone;
         $user->date_of_birth = $request->date_of_birth ?? $user->date_of_birth;
