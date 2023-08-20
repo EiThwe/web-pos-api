@@ -34,7 +34,7 @@ class BrandController extends Controller
             "user_id" => Auth::id(),
             "photo" => $request->photo ? $request->photo : config("info.default_photo")
         ]);
-        return new BrandResource($brand);
+        return response()->json(['message' => "brand has been created successfully"], 201);
     }
 
     /**
@@ -78,7 +78,7 @@ class BrandController extends Controller
         }
         $brand->update();
 
-        return new BrandResource($brand);
+        return  response()->json(['message' => "brand has been updated successfully"]);
     }
 
     /**

@@ -22,7 +22,7 @@ class StorePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-           "photo" =>"required|file|max:1024"
+            "photos" => "required|max:1024"
         ];
     }
 }

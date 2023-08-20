@@ -38,7 +38,7 @@ class ProductController extends Controller
             "more_information" => $request->more_information,
             "photo" => $request->photo
         ]);
-        return new ProductResource($product);
+        return  response()->json(['message' => "product has been created successfully"], 201);
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductController extends Controller
         $product->unit = $request->unit ?? $product->unit;
         $product->more_information = $request->more_information ?? $product->more_information;
         $product->update();
-        return response()->json(["message" => "Product is updated successfully"]);
+        return response()->json(["message" => "product has been updated successfully"]);
     }
 
     /**

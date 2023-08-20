@@ -63,10 +63,11 @@ class apiAuthController extends Controller
         $token = Auth::user()->createToken($request->has("device") ? $request->device : 'unknown')->plainTextToken;
         return response()->json([
             "message" => "Login successfully",
-            "user" => Auth::user(),
+            "device" => $request->device ?? "unknown",
             "token" => $token
         ]);
     }
+
     public function logout()
     {
         Auth::user()->currentAccessToken()->delete();

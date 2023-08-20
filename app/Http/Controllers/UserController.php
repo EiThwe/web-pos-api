@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -35,6 +36,7 @@ class UserController extends Controller
         }
         return response()->json(["user" => $user]);
     }
+
     public function userUpdate(UpdateProfileRequest $request, $id)
     {
         if (Gate::denies("isAdmin")) {
@@ -52,10 +54,12 @@ class UserController extends Controller
         $user->email = $request->email ?? $user->email;
         $user->status = $request->status ?? $user->status;
         $user->user_photo = $request->user_photo ?? $user->user_photo;
+        $user->password = $request->password ? Hash::make($request->password) : $user->password;
         $user->update();
 
         return response()->json(["message" => "User info is updated successfully"]);
     }
+
     public function userDelete($id)
     {
         if (Gate::denies("isAdmin")) {

@@ -34,7 +34,7 @@ class StockController extends Controller
         ]);
         $stock->product->total_stock += $request->quantity;
         $stock->product->save();
-        return response()->json(["message"=>"A stock is created successfully"]);
+        return response()->json(["message" => "A stock is created successfully"], 201);
     }
 
     /**

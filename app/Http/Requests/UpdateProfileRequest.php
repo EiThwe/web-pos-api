@@ -22,14 +22,15 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=>"min:3",
-            "phone"=>"numeric|min:9",
-            "date_of_birth"=>"date",
+            "name" => "min:3",
+            "phone" => "numeric|min:9",
+            "date_of_birth" => "date",
             "gender" => "in:male,female",
             "status" => "in:active,ban",
-            "address"=>"min:50",
-            "email"=>"email|unique:users",
-            "user_photo"=>"url"
+            "address" => "min:50",
+            "email" => "email|unique:users",
+            "user_photo" => "url",
+            "password" => "min:8|confirmed"
         ];
     }
 }

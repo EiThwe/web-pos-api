@@ -27,23 +27,34 @@ class PhotoController extends Controller
     public function upload(StorePhotoRequest $request)
     {
 
-        if ($request->hasFile('photo')) {
-            $fileExt =  $request->file('photo')->extension();
-            $fileName = $request->file('photo')->getClientOriginalName();
-            $savedPhoto = $request->file("photo")->store("public/media");
-            $fileSizeBytes =  $request->file('photo')->getSize();
-        }
-        $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
-        $photoUrl = asset(Storage::url($savedPhoto));
+        if ($request->hasFile('photos')) {
+            $photos = $request->file("photos");
+            $savedPhotos = [];
 
-        $photo = Photo::create([
-            "url" => $photoUrl,
-            "name" => $fileName,
-            "ext" => $fileExt,
-            "file_size"=>$fileSizeMB."MB",
-            "user_id" => Auth::id()
-        ]);
-        return response()->json(["data" => $photo]);
+            foreach ($photos as $photo) {
+                $savedPhoto = $photo->store("public/media");
+                $fileExt =  $photo->extension();
+                $fileName = $photo->getClientOriginalName();
+                $fileSizeBytes =  $photo->getSize();
+                $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
+                $photoUrl = asset(Storage::url($savedPhoto));
+
+                $savedPhotos[] = [
+                    "url" => $photoUrl,
+                    "name" => $fileName,
+                    "ext" => $fileExt,
+                    "file_size" => $fileSizeBytes,
+                    "user_id" => Auth::id(),
+                    "created_at" => now(),
+                    "updated_at" => now(),
+                ];
+                # code...
+            }
+
+            Photo::insert($savedPhotos);
+        }
+
+        return response()->json(["message" => "uploaded successfully"], 201);
     }
 
     /**
