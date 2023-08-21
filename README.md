@@ -132,6 +132,28 @@ __Logout All Devices__ `POST`
 ```
  http://127.0.0.1:8000/api/v1/logout-all
 ```
+### Media
+
+__Get Media__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/media
+```
+__Photo Upload__ `POST`
+
+```
+ http://127.0.0.1:8000/api/v1/media
+```
+
+__Photo Delete__ `DELETE`
+
+```
+ http://127.0.0.1:8000/api/v1/media/{id}
+```
+
+Arguments  |  Type  |  Status | Description 
+-----------|--------|---------|------------
+photos      |file array | **Required**| []
 
 ### Brand
 
