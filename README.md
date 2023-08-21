@@ -31,13 +31,51 @@ Arguments  |  Type  |  Status | Description
 name      | string | **Required**| Chit Chit
 email      | string | **Required**| cc@gmail.com
 password   | string | **Required** |11223344  
+phone   | string | **Required** |0992841085  
+date_of_birth   | string | **Required** |1.11.2000  
+gender   | string | **Required** |male
+address   | text | **Required** |min:50  
+user_photo|url|default|url_link
 
-  __Logout__ `POST`
+__Logout__ `POST`
 
 ```
  http://127.0.0.1:8000/api/v1/logout
 ```
 ### Profile
+
+__Get Profile__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/profile
+```
+__Profile Update__ `PUT/PATCH`
+
+```
+ http://127.0.0.1:8000/api/v1/profile
+```
+
+Arguments  |  Type  |  Status | Description 
+-----------|--------|---------|------------
+name      | string | **Required**| Chit Chit
+email      | string | **Required**| cc@gmail.com 
+phone   | string | **Required** |0992841085  
+date_of_birth   | string | **Required** |1.11.2000  
+gender   | string | **Required** |male
+address   | text | **Required** |min:50  
+user_photo|url|default|url_link
+
+__Change Password__ `POST`
+
+```
+ http://127.0.0.1:8000/api/v1/change-password
+```
+
+Arguments  |  Type  |  Status | Description 
+-----------|--------|---------|------------
+current_password      | string | **Required**| 11223344
+new_password| string | **Required**| 111222333
+new_password_confirmation   | string | **Required** |111222333  
 
 __All Devices__ `GET`
 
