@@ -18,7 +18,7 @@ class PhotoController extends Controller
         $photos = Photo::when(Auth::user()->role !== 'admin', function ($query) {
             $query->where("user_id", Auth::id());
         })->latest("id")->paginate(10)->withQueryString();
-        return response()->json(["data" => $photos]);
+        return response()->json($photos);
     }
 
     /**
