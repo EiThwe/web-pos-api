@@ -31,6 +31,7 @@ Arguments  |  Type  |  Status | Description
 name      | string | **Required**| Chit Chit
 email      | string | **Required**| cc@gmail.com
 password   | string | **Required** |11223344  
+password_confirmation   | string | **Required** |11223344  
 phone   | string | **Required** |0992841085  
 date_of_birth   | string | **Required** |1.11.2000  
 gender   | string | **Required** |male
@@ -76,6 +77,49 @@ Arguments  |  Type  |  Status | Description
 current_password      | string | **Required**| 11223344
 new_password| string | **Required**| 111222333
 new_password_confirmation   | string | **Required** |111222333  
+
+### Users
+
+_Only Admin can see these routes_
+
+__Get Users__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/users?page={id}
+```
+
+__Get Single User__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/users/{id}
+```
+
+__User Update__ `PUT/PATCH`
+
+```
+ http://127.0.0.1:8000/api/v1/users/{id}
+```
+
+Arguments  |  Type  |  Status | Description 
+-----------|--------|---------|------------
+name      | string | **Required**| Chit Chit
+email      | string | **Required**| cc@gmail.com
+password   | string | **Required** |11223344  
+password_confirmation   | string | **Required** |11223344  
+phone   | string | **Required** |0992841085  
+date_of_birth   | string | **Required** |1.11.2000  
+gender   | string | **Required** |male
+address   | text | **Required** |min:50  
+user_photo|url|default|url_link
+
+
+__User Delete__ `DELETE`
+
+```
+ http://127.0.0.1:8000/api/v1/users/{id}
+```
+
+### Devices and Log out
 
 __All Devices__ `GET`
 
