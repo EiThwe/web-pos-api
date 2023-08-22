@@ -32,7 +32,9 @@ class BrandController extends Controller
             "company" => $request->company,
             "information" => $request->information,
             "user_id" => Auth::id(),
-            "photo" => $request->photo ? $request->photo : config("info.default_photo")
+            "photo" => $request->photo ? $request->photo : config("info.default_photo"),
+            "agent" => $request->agent,
+            "phone" => $request->phone
         ]);
         return response()->json(['message' => "brand has been created successfully"], 201);
     }
@@ -62,20 +64,12 @@ class BrandController extends Controller
                 "message" => "Brand not found"
             ], 404);
         }
-        if ($request->has('name')) {
-            $brand->name = $request->name;
-        }
-
-        if ($request->has('company')) {
-            $brand->company = $request->company;
-        }
-
-        if ($request->has('information')) {
-            $brand->information = $request->information;
-        }
-        if ($request->has('photo')) {
-            $brand->photo = $request->photo;
-        }
+        $brand->name = $request->name ?? $brand->name;
+        $brand->company = $request->company ?? $brand->company;
+        $brand->information = $request->information ?? $brand->information;
+        $brand->photo = $request->photo ?? $brand->photo;
+        $brand->phone = $request->phone ?? $brand->phone;
+        $brand->agent = $request->agent ?? $brand->agent;
         $brand->update();
 
         return  response()->json(['message' => "brand has been updated successfully"]);

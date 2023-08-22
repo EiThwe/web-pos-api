@@ -9,6 +9,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class StockController extends Controller
 {
@@ -26,6 +27,10 @@ class StockController extends Controller
      */
     public function store(StoreStockRequest $request)
     {
+        if ($request->more_information && Str::length($request->more_formation < 50)) {
+            return response()->json(["message" => "more_formation must be greater than 50 characters"]);
+        }
+
         $stock = Stock::create([
             "user_id" => Auth::id(),
             "product_id" => $request->product_id,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,7 +18,9 @@ class UserController extends Controller
                 "message" => "Unauthorized"
             ]);
         }
-        $users = User::latest("id")->paginate(10)->withQueryString();
+
+
+        $users = User::whereNot("id", Auth::id())->latest("id")->paginate(10)->withQueryString();
         return response()->json(["users" => $users]);
     }
 

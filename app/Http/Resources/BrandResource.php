@@ -21,8 +21,9 @@ class BrandResource extends JsonResource
             "name" => $this->name,
             "company" => $this->company,
             "information" => $this->information,
-            "created_user" => ["name" => $this->user->name, "user_photo" => $this->user->user_photo],
-            "photo" => $this->photo
+            "photo" => $this->photo,
+            "phone" => $this->phone,
+            "agent" => $this->agent,
         ];
     }
 }

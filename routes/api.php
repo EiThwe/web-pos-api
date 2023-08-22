@@ -53,7 +53,7 @@ Route::prefix("v1")->group(function () {
             // inventory
             Route::apiResource("brands", BrandController::class);
             Route::apiResource("products", ProductController::class);
-            Route::apiResource("stocks", StockController::class);
+            Route::apiResource("stocks", StockController::class)->only(["store", "destory"]);
             // sale
             Route::apiResource("vouchers", VoucherController::class);
             //photo

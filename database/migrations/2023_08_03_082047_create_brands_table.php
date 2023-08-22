@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text("information")->nullable();
             $table->foreignId("user_id");
             $table->string("photo")->default(config("info.default_photo"));
+            $table->string("agent");
+            $table->string("phone");
             $table->timestamps();
         });
     }

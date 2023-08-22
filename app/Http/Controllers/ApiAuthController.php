@@ -24,6 +24,7 @@ class apiAuthController extends Controller
             "phone" => "required|numeric|min:9",
             "date_of_birth" => "required|date",
             "gender" => "required|in:male,female",
+            "role" => "required|in:admin,staff",
             "address" => "required|min:50",
             "email" => "required|email|unique:users",
             "password" => "required|min:8|confirmed",
@@ -31,7 +32,7 @@ class apiAuthController extends Controller
         ]);
 
 
-        $user = User::create([
+         User::create([
             "name" => $request->name,
             "phone" => $request->phone,
             "date_of_birth" => $request->date_of_birth,
@@ -39,7 +40,8 @@ class apiAuthController extends Controller
             "address" => $request->address,
             "email" => $request->email,
             "password" => Hash::make($request->password),
-            "user_photo" => $request->user_photo ?  $request->user_photo : config("info.default_user_photo")
+            "user_photo" => $request->user_photo ?  $request->user_photo : config("info.default_user_photo"),
+            "role" => $request->role
         ]);
 
         return response()->json([

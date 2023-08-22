@@ -25,6 +25,8 @@ class StoreBrandRequest extends FormRequest
             "name" => "required|min:2|max:50|unique:brands,name",
             "company" => "required|min:4|max:50",
             "information" => "required|min:50",
+            "phone" => "required|numeric",
+            "agent" => "required|min:3",
         ];
     }
 }
