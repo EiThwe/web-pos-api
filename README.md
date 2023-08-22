@@ -66,7 +66,7 @@ gender   | string | **Required** |male
 address   | text | **Required** |min:50  
 user_photo|url|default|url_link
 
-__Change Password__ `POST`
+__Change Password__ `PUT`
 
 ```
  http://127.0.0.1:8000/api/v1/change-password
@@ -181,6 +181,8 @@ name      | string | **Required** |MAMA(min:3)
 company      | string | **Required** |MAMA co.ltd
 information   | string | **Required** |min:50
 photo          |url|nullable|default photo
+agent          | string | **Required**| Daw Thi Thi
+phone          | numeric | **Required**| 09969969969
 
 __Update Brand__ `PUT/PATCH`
 
@@ -261,17 +263,6 @@ _Only admin can delete_
 ```
 ### Stock
 
-__Get Stocks__ `GET`
-
-```
- http://127.0.0.1:8000/api/v1/stocks?page={id}
-```
-
-__Get Single Stock__ `GET`
-
-```
- http://127.0.0.1:8000/api/v1/stocks/{id}
-```
 
 __Create Stock__ `POST`
 
@@ -283,19 +274,6 @@ Arguments  |  Type  |  Status | Description
 -----------|--------|---------|------------
 product_id      | integer | **Required** |3
 quantity      | integer | **Required** |10
-more_information   | string | nullable |min:50
-
-__Update Stock__ `PUT/PATCH`
-
-```
- http://127.0.0.1:8000/api/v1/stocks{id}
-```
-__You can update single parameter or more__
-
-Arguments  |  Type  |  Status | Description 
------------|--------|---------|------------
-product_id      | integer | integer |3
-quantity      | integer | integer |10
 more_information   | string | nullable |min:50
 
 __Delete Stock__ `DELETE`
