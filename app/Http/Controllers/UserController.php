@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,7 @@ class UserController extends Controller
         return response()->json(["user" => $user]);
     }
 
-    public function userUpdate(UpdateProfileRequest $request, $id)
+    public function userUpdate(UpdateUserRequest $request, $id)
     {
         if (Gate::denies("isAdmin")) {
             return response()->json([
