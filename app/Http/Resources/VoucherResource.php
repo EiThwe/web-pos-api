@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -22,7 +23,8 @@ class VoucherResource extends JsonResource
             "tax" => $this->tax,
             "net_total" => $this->net_total,
             "user" => $this->user->name,
-            "voucher_records" => $this->voucher_records
+            "date" => Carbon::parse($this->created_at)->format("h:i A"),
+            // "voucher_records" => VoucherRecordResource::collection($this->voucher_records)
         ];
     }
 }

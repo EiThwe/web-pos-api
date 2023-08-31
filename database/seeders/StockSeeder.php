@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\Stock;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -30,6 +31,7 @@ class StockSeeder extends Seeder
             $currentProduct->update();
         }
 
+        Setting::create(["status" => "open"]);
         Stock::insert($stocks);
     }
 }

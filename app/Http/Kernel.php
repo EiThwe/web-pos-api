@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\AddJsonHeaderMiddleware;
 use App\Http\Middleware\IsActiveUser;
+use App\Http\Middleware\IsSaleClose;
+use App\Http\Middleware\IsSaleOpen;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,6 +70,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        "isActiveUser"=>IsActiveUser::class
+        "isActiveUser" => IsActiveUser::class,
+        "isSaleClose" => IsSaleClose::class,
+        "isSaleOpen" => IsSaleOpen::class
     ];
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleRecordController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
@@ -60,7 +61,14 @@ Route::prefix("v1")->group(function () {
             Route::get("media", [PhotoController::class, "index"]);
             Route::post("media", [PhotoController::class, "upload"]);
             Route::delete("media/{id}", [PhotoController::class, "destroy"]);
-            Route::post("checkout", [VoucherController::class, "checkout"]);
+
+            Route::middleware("isSaleClose")->group(function () {
+                Route::post("checkout", [VoucherController::class, "checkout"]);
+                Route::post("sale-close", [SaleRecordController::class, "saleClose"]);
+            });
+            
+            Route::get("recent", [SaleRecordController::class, "recent"]);
+            Route::post("sale-open", [SaleRecordController::class, "saleOpen"])->middleware("isSaleOpen");
         });
     });
     Route::post("login", [ApiAuthController::class, 'login']);

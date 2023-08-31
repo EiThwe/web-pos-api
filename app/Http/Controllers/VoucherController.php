@@ -78,7 +78,7 @@ class VoucherController extends Controller
         $voucher =  Voucher::create([
             "customer" => $request->customer ?? "unknown",
             "phone" => $request->phone ?? "unknown",
-            "voucher_number" => Str::random(10),
+            "voucher_number" => strtolower(Str::random(10)),
             "total" => $total,
             "tax" => $tax,
             "net_total" => $net_total,
@@ -106,7 +106,7 @@ class VoucherController extends Controller
 
         VoucherRecord::insert($records);
 
-        
+
 
         return new VoucherResource($voucher);
     }
