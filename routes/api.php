@@ -71,6 +71,8 @@ Route::prefix("v1")->group(function () {
                 Route::post("sale-close", [SaleRecordController::class, "saleClose"]);
             });
 
+
+            Route::get("custom", [SaleRecordController::class, "custom"]);
             Route::get("recent", [SaleRecordController::class, "recent"]);
             Route::post("sale-open", [SaleRecordController::class, "saleOpen"])->middleware("isSaleOpen");
         });

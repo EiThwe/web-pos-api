@@ -139,4 +139,18 @@ class SaleRecordController extends Controller
             "total" => $total
         ]]);
     }
+
+    public function custom()
+    {
+        if (!request()->has("start") && !request()->has("end")) {
+            return response()->json(["message" => "start date and end date are required"], 400);
+        }
+
+        $startDate = Carbon::createFromFormat("d/m/Y", request()->start)->subDay(1);
+        $endDate = Carbon::createFromFormat("d/m/Y", request()->end);
+
+        $vouchers = Voucher::whereBetween("created_at", [$startDate, $endDate])->get();
+
+        return VoucherResource::collection($vouchers);
+    }
 }
