@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->double("total_cash");
             $table->double("total_tax");
+            $table->double("total_net_total");
             $table->double("total_vouchers");
-            $table->enum("monthly_record",["monthly","daily"]);
+            $table->enum("status", ["monthly", "daily"]);
             $table->integer("user_id");
             $table->timestamps();
         });

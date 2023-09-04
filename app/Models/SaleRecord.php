@@ -9,5 +9,5 @@ class SaleRecord extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["total_cash", "total_tax", "total_vouchers", "user_id"];
+    protected $fillable = ["total_cash", "total_tax","total_net_total", "total_vouchers", "status", "user_id"];
 }

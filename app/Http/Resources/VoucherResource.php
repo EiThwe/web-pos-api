@@ -24,7 +24,6 @@ class VoucherResource extends JsonResource
             "net_total" => $this->net_total,
             "user" => $this->user->name,
             "date" => Carbon::parse($this->created_at)->format("h:i A"),
-            // "voucher_records" => VoucherRecordResource::collection($this->voucher_records)
-        ];
+         ];
     }
 }

@@ -70,7 +70,6 @@ class ProductController extends Controller
         $product->brand_id = $request->brand_id ?? $product->brand_id;
         $product->actual_price = $request->actual_price ?? $product->actual_price;
         $product->sale_price = $request->sale_price ?? $product->sale_price;
-        $product->total_stock = $request->total_stock ?? $product->total_stock;
         $product->unit = $request->unit ?? $product->unit;
         $product->more_information = $request->more_information ?? $product->more_information;
         $product->update();

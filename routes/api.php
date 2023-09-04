@@ -57,6 +57,10 @@ Route::prefix("v1")->group(function () {
             Route::apiResource("stocks", StockController::class)->only(["store", "destory"]);
             // sale
             Route::apiResource("vouchers", VoucherController::class);
+            //records
+            Route::get("daily-records", [SaleRecordController::class, "daily"]);
+            Route::get("monthly-records", [SaleRecordController::class, "monthly"]);
+            Route::get("yearly-records", [SaleRecordController::class, "yearly"]);
             //photo
             Route::get("media", [PhotoController::class, "index"]);
             Route::post("media", [PhotoController::class, "upload"]);
@@ -66,7 +70,7 @@ Route::prefix("v1")->group(function () {
                 Route::post("checkout", [VoucherController::class, "checkout"]);
                 Route::post("sale-close", [SaleRecordController::class, "saleClose"]);
             });
-            
+
             Route::get("recent", [SaleRecordController::class, "recent"]);
             Route::post("sale-open", [SaleRecordController::class, "saleOpen"])->middleware("isSaleOpen");
         });
