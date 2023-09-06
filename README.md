@@ -341,6 +341,11 @@ __Sale Close__ `POST`
 ```
  http://127.0.0.1:8000/api/v1/sale-close
 ```
+__Monthly Close__ `POST`
+
+```
+ http://127.0.0.1:8000/api/v1/monthly-close?month=1&year=2023
+```
 __Sale Open__ `POST`
 
 ```
