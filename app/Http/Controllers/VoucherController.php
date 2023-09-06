@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Voucher;
 use App\Http\Requests\StoreVoucherRequest;
 use App\Http\Requests\UpdateVoucherRequest;
+use App\Http\Resources\ReceiptResource;
 use App\Http\Resources\VoucherRecordResource;
 use App\Http\Resources\VoucherResource;
 use App\Models\Product;
@@ -88,13 +89,20 @@ class VoucherController extends Controller
         ]);
 
         $records = [];
+        $items = [];
 
         foreach ($request->voucher_records as $record) {
             $currentProduct = $products->find($record["product_id"]);
 
+            $items[] = [
+                "name" => $currentProduct->name,
+                "price" => $currentProduct->sale_price,
+                "quantity" => $record["quantity"],
+                "cost" => $record["quantity"] * $currentProduct->sale_price,
+            ];
+
             $records[] = [
                 "voucher_id" => $voucher->id,
-                "name" => $currentProduct->name,
                 "product_id" => $record["product_id"],
                 "price" => $currentProduct->sale_price,
                 "quantity" => $record["quantity"],
@@ -107,8 +115,12 @@ class VoucherController extends Controller
             ]);
         }
 
+        $voucher["items"] = $items;
+
         VoucherRecord::insert($records);
-        return new VoucherResource($records);
+
+
+        return new ReceiptResource($voucher);
     }
 
     /**

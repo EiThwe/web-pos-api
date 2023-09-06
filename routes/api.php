@@ -69,6 +69,7 @@ Route::prefix("v1")->group(function () {
             Route::middleware("isSaleClose")->group(function () {
                 Route::post("checkout", [VoucherController::class, "checkout"]);
                 Route::post("sale-close", [SaleRecordController::class, "saleClose"]);
+                Route::post("monthly-close", [SaleRecordController::class, "monthlyClose"])->middleware("isMonthlyClose");
             });
 
 

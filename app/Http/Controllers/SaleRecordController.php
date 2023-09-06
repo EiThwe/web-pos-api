@@ -47,6 +47,39 @@ class SaleRecordController extends Controller
         return response()->json(["message" => "shop is close"], 200);
     }
 
+    public function monthlyClose()
+    {
+        if (!(request()->has("month") && request()->has("year"))) {
+            return response()->json([
+                "message" => "month and year are required"
+            ]);
+        }
+        $query = SaleRecord::where("status", "daily")
+            ->whereMonth("created_at", request()->month)
+            ->whereYear("created_at", request()->year);
+        $all_records = $query->get();
+
+        $total_cash = $all_records->sum("total_cash");
+        $total_tax = $all_records->sum("total_tax");
+        $total = $all_records->sum("total_net_total");
+        $total_vouchers = $all_records->sum("total_vouchers");
+
+        SaleRecord::insert([
+            "total_cash" => $total_cash,
+            "total_tax" => $total_tax,
+            "total_net_total" => $total,
+            "total_vouchers" => $total_vouchers,
+            "status" => "monthly",
+            "created_at" => Carbon::createFromDate(request()->year,  request()->month, 1)->endOfMonth(),
+            "updated_at" => now(),
+            "user_id" => Auth::id()
+        ]);
+
+        return response()->json([
+            "message" => "monthly record successfully saved"
+        ], 201);
+    }
+
     public function recent()
     {
         $today = Carbon::today();

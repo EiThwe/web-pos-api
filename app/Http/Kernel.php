@@ -6,6 +6,7 @@ use App\Http\Middleware\AddJsonHeaderMiddleware;
 use App\Http\Middleware\IsActiveUser;
 use App\Http\Middleware\IsSaleClose;
 use App\Http\Middleware\IsSaleOpen;
+use App\Http\Middleware\MonthlyCloseMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -72,6 +73,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         "isActiveUser" => IsActiveUser::class,
         "isSaleClose" => IsSaleClose::class,
-        "isSaleOpen" => IsSaleOpen::class
+        "isSaleOpen" => IsSaleOpen::class,
+        "isMonthlyClose" => MonthlyCloseMiddleware::class,
     ];
 }
