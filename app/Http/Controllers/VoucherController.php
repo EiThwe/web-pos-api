@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Voucher;
 use App\Http\Requests\StoreVoucherRequest;
 use App\Http\Requests\UpdateVoucherRequest;
+use App\Http\Resources\VoucherRecordResource;
 use App\Http\Resources\VoucherResource;
 use App\Models\Product;
 use App\Models\VoucherRecord;
@@ -66,6 +67,7 @@ class VoucherController extends Controller
     {
         $productIds = collect($request->voucher_records)->pluck("product_id");
         $products = Product::whereIn("id", $productIds)->get();
+        // dd($products);
         $total = 0;
 
         foreach ($request->voucher_records as $record) {
@@ -92,6 +94,7 @@ class VoucherController extends Controller
 
             $records[] = [
                 "voucher_id" => $voucher->id,
+                "name" => $currentProduct->name,
                 "product_id" => $record["product_id"],
                 "price" => $currentProduct->sale_price,
                 "quantity" => $record["quantity"],
@@ -105,10 +108,7 @@ class VoucherController extends Controller
         }
 
         VoucherRecord::insert($records);
-
-
-
-        return new VoucherResource($voucher);
+        return new VoucherResource($records);
     }
 
     /**
