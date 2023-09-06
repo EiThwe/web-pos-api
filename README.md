@@ -336,3 +336,40 @@ customer      | string | nullable |Aung Aung(min: 3)
 phone      | integer | nullable |09969969969(min: 6)
 voucher_records   | array | **Required** | [ { product_id, quantity } ]
 
+__Sale Close__ `POST`
+
+```
+ http://127.0.0.1:8000/api/v1/sale-close
+```
+__Sale Open__ `POST`
+
+```
+ http://127.0.0.1:8000/api/v1/sale-open
+```
+__Recent__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/recent&page={id}
+```
+### Finance
+
+__Daily Records__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/daily-records?date=1/2/2023&page={id}
+```
+__Monthly Records__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/monthly-records?year=2023&month=2&page={id}
+```
+__Yearly Records__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/yearly-records?year=2023&page={id}
+```
+__Custom Records__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/custom?start=31/8/2023&end=31/8/2023&page={id}
+```
