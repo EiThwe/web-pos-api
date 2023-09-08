@@ -21,7 +21,20 @@ class UserController extends Controller
         }
 
 
-        $users = User::whereNot("id", Auth::id())->latest("id")->paginate(10)->withQueryString();
+        $users = User::whereNot("id", Auth::id())->where("status", "active")->latest("id")->paginate(10)->withQueryString();
+        return response()->json(["users" => $users]);
+    }
+
+    public function banUsers()
+    {
+        if (Gate::denies("isAdmin")) {
+            return response()->json([
+                "message" => "Unauthorized"
+            ]);
+        }
+
+
+        $users = User::where("status", "ban")->latest("id")->paginate(10)->withQueryString();
         return response()->json(["users" => $users]);
     }
 
@@ -56,12 +69,44 @@ class UserController extends Controller
         $user->gender = $request->gender ?? $user->gender;
         $user->address = $request->address ?? $user->address;
         $user->email = $request->email ?? $user->email;
-        $user->status = $request->status ?? $user->status;
+        // $user->status = $request->status ?? $user->status;
         $user->user_photo = $request->user_photo ?? $user->user_photo;
         $user->password = $request->password ? Hash::make($request->password) : $user->password;
         $user->update();
 
         return response()->json(["message" => "User info is updated successfully"]);
+    }
+
+    public function userBan(UpdateUserRequest $request, $id)
+    {
+        if (Gate::denies("isAdmin")) {
+            return response()->json([
+                "message" => "Unauthorized"
+            ]);
+        }
+
+
+        $user = User::find($id);
+        $user->status = "ban";
+        $user->update();
+
+        return response()->json(["message" => "User is banned successfully"]);
+    }
+
+    public function userRestore(UpdateUserRequest $request, $id)
+    {
+        if (Gate::denies("isAdmin")) {
+            return response()->json([
+                "message" => "Unauthorized"
+            ]);
+        }
+
+
+        $user = User::find($id);
+        $user->status = "active";
+        $user->update();
+
+        return response()->json(["message" => "User is restore successfully"]);
     }
 
     public function userDelete($id)

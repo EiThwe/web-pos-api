@@ -43,9 +43,13 @@ Route::prefix("v1")->group(function () {
             Route::put("change-password", [ApiAuthController::class, 'changePassword']);
             //users
             Route::get("users", [UserController::class, 'users']);
+            Route::get("ban-users", [UserController::class, 'banUsers']);
             Route::get("users/{id}", [UserController::class, 'user']);
             Route::put("users/{id}", [UserController::class, 'userUpdate']);
             Route::patch("users/{id}", [UserController::class, 'userUpdate']);
+            Route::patch("users/{id}/ban", [UserController::class, 'userBan']);
+            Route::patch("users/{id}/restore", [UserController::class, 'userRestore']);
+
 
 
             Route::delete("users/{id}", [UserController::class, 'userDelete']);
