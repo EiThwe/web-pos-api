@@ -197,6 +197,8 @@ name      | string | nullable| MAMA 3(min:3)
 company      | string | nullable| MA MA
 information   | string | nullable |min:50
 photo  | url | nullable|default photo
+agent          | string | **Required**| Daw Thi Thi
+phone          | numeric | **Required**| 09969969969
 
 __Delete Brand__ `DELETE`
 
