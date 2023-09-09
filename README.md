@@ -119,6 +119,18 @@ __User Delete__ `DELETE`
  http://127.0.0.1:8000/api/v1/users/{id}
 ```
 
+__Ban User__ `PATCH`
+
+```
+ http://127.0.0.1:8000/api/v1/users/{id}/ban
+```
+
+__Ban User List__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/ban-users
+```
+
 ### Devices and Log out
 
 __All Devices__ `GET`
