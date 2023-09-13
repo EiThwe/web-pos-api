@@ -182,8 +182,20 @@ class SaleRecordController extends Controller
         $startDate = Carbon::createFromFormat("d/m/Y", request()->start)->subDay(1);
         $endDate = Carbon::createFromFormat("d/m/Y", request()->end);
 
-        $vouchers = Voucher::whereBetween("created_at", [$startDate, $endDate])->get();
+        $query = Voucher::whereBetween("created_at", [$startDate, $endDate]);
+        $all_records = $query->get();
+        $vouchers = $query->latest("created_at")->paginate(10)->withQueryString();
 
-        return VoucherResource::collection($vouchers);
+        $total_cash = $all_records->sum("total");
+        $total_tax = $all_records->sum("tax");
+        $total = $all_records->sum("net_total");
+        $total_vouchers = $all_records->count();
+
+        return VoucherResource::collection($vouchers)->additional(["total" => [
+            "total_voucher" => $total_vouchers,
+            "total_cash" => $total_cash,
+            "total_tax" => $total_tax,
+            "total" => $total
+        ]]);
     }
 }

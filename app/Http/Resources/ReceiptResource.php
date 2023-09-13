@@ -18,7 +18,8 @@ class ReceiptResource extends JsonResource
             "total" => $this->total,
             "tax" => $this->tax,
             "net_total" => $this->net_total,
-            "voucher_records" => $this->items
+            "voucher_records" => $this->items,
+
 
         ];
     }

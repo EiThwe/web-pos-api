@@ -80,6 +80,8 @@ Route::prefix("v1")->group(function () {
             Route::get("custom", [SaleRecordController::class, "custom"]);
             Route::get("recent", [SaleRecordController::class, "recent"]);
             Route::post("sale-open", [SaleRecordController::class, "saleOpen"])->middleware("isSaleOpen");
+
+            Route::get("stock-overview", [StockController::class, "stockOverview"]);
         });
     });
     Route::post("login", [ApiAuthController::class, 'login']);
