@@ -81,7 +81,13 @@ Route::prefix("v1")->group(function () {
             Route::get("recent", [SaleRecordController::class, "recent"]);
             Route::post("sale-open", [SaleRecordController::class, "saleOpen"])->middleware("isSaleOpen");
 
+            // stock overview
             Route::get("stock-overview", [StockController::class, "stockOverview"]);
+            Route::get("stock-overview-list", [StockController::class, "stockOverviewList"]);
+
+            //sale overview
+            Route::get("today-sale-overview", [SaleRecordController::class, "todaySaleOverview"]);
+            Route::get("sale-overview/{type}", [SaleRecordController::class, "saleOverview"]);
         });
     });
     Route::post("login", [ApiAuthController::class, 'login']);

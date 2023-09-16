@@ -6,6 +6,7 @@ use App\Models\SaleRecord;
 use App\Http\Requests\StoreSaleRecordRequest;
 use App\Http\Requests\UpdateSaleRecordRequest;
 use App\Http\Resources\MonthlyRecordResource;
+use App\Http\Resources\TodaySaleOverviewResource;
 use App\Http\Resources\VoucherResource;
 use App\Http\Resources\YearlySaleRecordResource;
 use App\Models\Setting;
@@ -197,5 +198,70 @@ class SaleRecordController extends Controller
             "total_tax" => $total_tax,
             "total" => $total
         ]]);
+    }
+
+    public function todaySaleOverview()
+    {
+        $today = Carbon::today();
+        $vouchers = Voucher::whereDate("created_at", $today)->orderBy("net_total", "desc")->get();
+
+        // dd($vouchers);
+
+        $total_amount = $vouchers->sum("net_total");
+
+        $vouchers = json_decode($vouchers, true);
+
+
+        $top_3_vouchers = array_slice($vouchers, 0, 3);
+
+        $top_3_vouchers = array_map(function ($voucher) use ($total_amount) {
+
+            return [
+                "voucher_number" => $voucher["voucher_number"],
+                "net_total" => $voucher["net_total"],
+                "percentage" => round($voucher["total"] / $total_amount * 100, 1) . "%"
+            ];
+        }, $top_3_vouchers);
+
+        return response()->json([
+            "total_amount" => round($total_amount, 2),
+            "vouchers" => $top_3_vouchers
+        ]);
+    }
+
+    public function saleOverview($type)
+    {
+        $currentDate = Carbon::now();
+        $previousDate = '';
+        $status = "daily";
+
+        if ($type == "weekly") {
+            $previousDate = Carbon::now()->subDays(7);
+        } else if ($type == "monthly") {
+            $previousDate = Carbon::now()->subDays(30);
+        } else if ($type == "yearly") {
+            $previousDate = Carbon::now()->subDays(365);
+            $status = "monthly";
+        } else {
+            return response()->json(["message" => "weekly or monthly or yearly is required"]);
+        }
+
+        $query = SaleRecord::whereBetween("created_at", [$previousDate, $currentDate])->where("status", $status);
+        $query2 = SaleRecord::whereBetween("created_at", [$previousDate, $currentDate])->where("status", $status);
+
+        $average = $query->avg("total_net_total");
+
+        $records = $query->select("total_net_total", "created_at")->get();
+
+        $max = $query->where('total_net_total', $query->max('total_net_total'))->select("total_net_total", "created_at")->first();
+
+        $min = $query2->where('total_net_total', $query2->min('total_net_total'))->select("total_net_total", "created_at")->first();
+
+        return response()->json([
+            "average" => $average,
+            "max" => $max,
+            "min" => $min,
+            "records" => $records
+        ]);
     }
 }

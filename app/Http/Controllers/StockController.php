@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStockRequest;
 use App\Http\Requests\UpdateStockRequest;
+use App\Http\Resources\StockOverviewListResource;
 use App\Http\Resources\StockResource;
 use App\Models\Brand;
 use App\Models\Product;
@@ -128,5 +129,10 @@ class StockController extends Controller
             "best_seller_brands" => $best_seller_brands,
 
         ], 200);
+    }
+    
+    public function stockOverviewList(){
+        $products = Product::latest("id")->paginate(10)->withQueryString();
+        return StockOverviewListResource::collection($products);
     }
 }
