@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Sep 05, 2023 at 05:34 PM
+-- Generation Time: Sep 25, 2023 at 05:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -143,6 +143,16 @@ CREATE TABLE `personal_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, 'unknown', '7be28bc062f03133e57d28ec71d9ba070b709de3cd4383c7b7017407ebba4a12', '[\"*\"]', '2023-09-07 16:57:52', NULL, '2023-09-06 05:53:57', '2023-09-07 16:57:52'),
+(2, 'App\\Models\\User', 1, 'unknown', '709f3c0fefcf4117a833903c223ef95ebc9ab27b6a506e6646f8fbfd35305e16', '[\"*\"]', '2023-09-25 15:07:54', NULL, '2023-09-12 15:34:14', '2023-09-25 15:07:54'),
+(3, 'App\\Models\\User', 1, 'unknown', '776b3fa6d1cfe16ac81ba2abe1aa51f964f47cd0e769f98bd46b18b720cfde47', '[\"*\"]', '2023-09-25 15:34:36', NULL, '2023-09-25 15:34:10', '2023-09-25 15:34:36'),
+(4, 'App\\Models\\User', 1, 'unknown', '9e3cb3c5bb81fb5c5fec5ebe44752645207582b85448bb84bb01e55b266c1701', '[\"*\"]', NULL, NULL, '2023-09-25 15:39:24', '2023-09-25 15:39:24');
+
 -- --------------------------------------------------------
 
 --
@@ -186,13 +196,13 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `brand_id`, `user_id`, `actual_price`, `sale_price`, `total_stock`, `unit`, `more_information`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 'Et voluptatem sed consequuntur voluptatem molestiae.', 6, 5, 7719, 8005, 54, 'pack', 'Ut harum amet ut impedit. Iste facilis asperiores tempora nihil dolorum officiis illum. Dignissimos nam vel saepe in ducimus dicta. Est ratione sit magni omnis.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
+(1, 'Et voluptatem sed consequuntur voluptatem molestiae.', 6, 5, 7719, 8005, -2, 'pack', 'Ut harum amet ut impedit. Iste facilis asperiores tempora nihil dolorum officiis illum. Dignissimos nam vel saepe in ducimus dicta. Est ratione sit magni omnis.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-14 16:53:22'),
 (2, 'Totam et libero eos.', 9, 5, 150, 4240, 84, 'pack', 'Aut reiciendis fugit natus. Animi aut animi deserunt. Natus deserunt vel aut qui voluptatem.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
-(3, 'Voluptatibus sed dolorem sunt exercitationem.', 19, 4, 4806, 1778, 81, 'pack', 'Quis nulla omnis quia iusto occaecati. Quaerat rerum aliquam provident eos. Deserunt tempore et dolor est reiciendis sapiente.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
-(4, 'Voluptatem necessitatibus voluptatem similique optio veniam sequi.', 4, 3, 158, 9425, 31, 'pack', 'Suscipit pariatur eveniet et. Dolorem quisquam quibusdam distinctio at magni quibusdam dolores. Sit aliquam ut itaque asperiores.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
-(5, 'Maiores quo eveniet reiciendis autem.', 15, 5, 8081, 2840, 56, 'pack', 'Porro veritatis aut adipisci iure dolorem ut. Esse at dolorem in iure. Qui dolor cumque ducimus quidem odit ullam eaque. Vitae aspernatur repellendus beatae. Earum sunt rerum nisi.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
-(6, 'Et minus totam voluptas.', 6, 2, 1082, 6963, 30, 'pack', 'Consequatur aliquam et repellendus animi nemo debitis in. Eius illum earum est quis asperiores. Vero eos et modi et ipsam impedit voluptatem. Corrupti placeat repellendus voluptatem.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
-(7, 'Quisquam eos hic culpa ut magni officia.', 5, 3, 8442, 6232, 30, 'pack', 'Quod modi molestias est repudiandae sint voluptatum. Amet nihil omnis cum adipisci. Voluptatum magnam aliquam et eos dolores.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
+(3, 'Voluptatibus sed dolorem sunt exercitationem.', 19, 4, 4806, 1778, -64, 'pack', 'Quis nulla omnis quia iusto occaecati. Quaerat rerum aliquam provident eos. Deserunt tempore et dolor est reiciendis sapiente.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-14 16:53:32'),
+(4, 'Voluptatem necessitatibus voluptatem similique optio veniam sequi.', 4, 3, 158, 9425, 21, 'pack', 'Suscipit pariatur eveniet et. Dolorem quisquam quibusdam distinctio at magni quibusdam dolores. Sit aliquam ut itaque asperiores.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-19 16:07:45'),
+(5, 'Maiores quo eveniet reiciendis autem.', 15, 5, 8081, 2840, 44, 'pack', 'Porro veritatis aut adipisci iure dolorem ut. Esse at dolorem in iure. Qui dolor cumque ducimus quidem odit ullam eaque. Vitae aspernatur repellendus beatae. Earum sunt rerum nisi.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-14 16:53:39'),
+(6, 'Et minus totam voluptas.', 6, 2, 1082, 6963, 20, 'pack', 'Consequatur aliquam et repellendus animi nemo debitis in. Eius illum earum est quis asperiores. Vero eos et modi et ipsam impedit voluptatem. Corrupti placeat repellendus voluptatem.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-14 16:53:49'),
+(7, 'Quisquam eos hic culpa ut magni officia.', 5, 3, 8442, 6232, 14, 'pack', 'Quod modi molestias est repudiandae sint voluptatum. Amet nihil omnis cum adipisci. Voluptatum magnam aliquam et eos dolores.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-19 16:07:45'),
 (8, 'Libero repellendus id et voluptates ut soluta.', 5, 1, 4173, 8560, 81, 'pack', 'Odit necessitatibus dolor perspiciatis natus aut. Aut explicabo facere accusantium sed iure aut. Ullam fugiat error laboriosam deserunt dolores doloremque excepturi.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
 (9, 'Nulla dolores consequatur aut.', 15, 3, 8559, 3124, 15, 'pack', 'Qui minima dolorem amet libero quod unde. Tenetur est amet aut. Tenetur ipsa est facere natus praesentium.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
 (10, 'Consectetur reprehenderit ducimus esse.', 10, 3, 9113, 6175, 39, 'pack', 'Ipsa eligendi cum itaque doloremque ducimus tempora. Reprehenderit incidunt laudantium ipsa cumque. Adipisci tempora dolorem neque voluptatem est iusto. Vitae error eaque porro fugit officiis.', 'https://m.media-amazon.com/images/I/71PTGKxXdDL._AC_SR920,736_.jpg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
@@ -261,7 +271,6 @@ INSERT INTO `sale_records` (`id`, `total_cash`, `total_tax`, `total_net_total`, 
 (29, 28658172.9, 1364674.9, 30022847.8, 10, 'daily', 7, '2022-01-29 08:07:24', '2022-01-29 08:07:24'),
 (30, 29792482.65, 1418689.65, 31211172.3, 10, 'daily', 7, '2022-01-30 10:14:05', '2022-01-30 10:14:05'),
 (31, 30898719.6, 1471367.6, 32370087.2, 10, 'daily', 9, '2022-01-31 09:17:39', '2022-01-31 09:17:39'),
-(32, 490621927.95, 23362948.95, 513984876.9, 310, 'monthly', 4, '2022-01-31 09:17:39', '2022-01-31 09:17:39'),
 (33, 31853193.75, 1516818.75, 33370012.5, 10, 'daily', 5, '2022-02-01 06:48:48', '2022-02-01 06:48:48'),
 (34, 32644435.95, 1554496.95, 34198932.9, 10, 'daily', 6, '2022-02-02 03:20:05', '2022-02-02 03:20:05'),
 (35, 33704759.55, 1604988.55, 35309748.1, 10, 'daily', 7, '2022-02-03 07:24:45', '2022-02-03 07:24:45'),
@@ -705,9 +714,9 @@ INSERT INTO `sale_records` (`id`, `total_cash`, `total_tax`, `total_net_total`, 
 (473, 449927145.15, 21425102.15, 471352247.3, 10, 'daily', 6, '2023-04-03 10:18:37', '2023-04-03 10:18:37'),
 (474, 450816061.5, 21467431.5, 472283493, 10, 'daily', 5, '2023-04-04 03:51:20', '2023-04-04 03:51:20'),
 (475, 451791453.75, 21513878.75, 473305332.5, 10, 'daily', 1, '2023-04-05 06:47:40', '2023-04-05 06:47:40'),
-(476, 452791727.85, 21561510.85, 474353238.7, 10, 'daily', 1, '2023-04-06 10:29:24', '2023-04-06 10:29:24');
+(476, 452791727.85, 21561510.85, 474353238.7, 10, 'daily', 1, '2023-04-06 10:29:24', '2023-04-06 10:29:24'),
+(477, 453838164.15, 21611341.15, 475449505.3, 10, 'daily', 2, '2023-04-07 03:28:24', '2023-04-07 03:28:24');
 INSERT INTO `sale_records` (`id`, `total_cash`, `total_tax`, `total_net_total`, `total_vouchers`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(477, 453838164.15, 21611341.15, 475449505.3, 10, 'daily', 2, '2023-04-07 03:28:24', '2023-04-07 03:28:24'),
 (478, 454682938.5, 21651568.5, 476334507, 10, 'daily', 9, '2023-04-08 04:22:59', '2023-04-08 04:22:59'),
 (479, 455726412.75, 21701257.75, 477427670.5, 10, 'daily', 4, '2023-04-09 06:33:45', '2023-04-09 06:33:45'),
 (480, 456588657, 21742317, 478330974, 10, 'daily', 6, '2023-04-10 06:36:29', '2023-04-10 06:36:29'),
@@ -858,7 +867,8 @@ INSERT INTO `sale_records` (`id`, `total_cash`, `total_tax`, `total_net_total`, 
 (625, 597373117.95, 28446338.95, 625819456.9, 10, 'daily', 1, '2023-08-29 10:00:35', '2023-08-29 10:00:35'),
 (626, 598123022.7, 28482048.7, 626605071.4, 10, 'daily', 1, '2023-08-30 04:43:29', '2023-08-30 04:43:29'),
 (627, 599004485.1, 28524023.1, 627528508.2, 10, 'daily', 2, '2023-08-31 03:10:00', '2023-08-31 03:10:00'),
-(628, 18105348721.95, 862159462.95, 18967508184.9, 310, 'monthly', 9, '2023-08-31 03:10:00', '2023-08-31 03:10:00');
+(628, 18105348721.95, 862159462.95, 18967508184.9, 310, 'monthly', 9, '2023-08-31 03:10:00', '2023-08-31 03:10:00'),
+(632, 490621927.95, 23362948.95, 513984876.9, 310, 'monthly', 1, '2022-01-31 17:29:59', '2023-09-06 17:02:07');
 
 -- --------------------------------------------------------
 
@@ -961,7 +971,7 @@ INSERT INTO `users` (`id`, `name`, `phone`, `date_of_birth`, `gender`, `address`
 (8, 'Benjamin Reynolds V', '920-215-0130', '16-05-1991', 'male', 'Velit ex et repudiandae vitae quidem earum debitis debitis.', 'sanford.fanny@example.net', '2023-09-05 15:31:09', '$2y$10$zzsbCqgcUna3C2rKxWvcxOi42VTwosMmmWShNN.aMsWbx/DSccE.q', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'RxB5mgOGyS', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
 (9, 'Mrs. Heloise Torp', '(617) 715-8032', '25-01-2014', 'male', 'Et rerum corrupti qui consequatur dolor minus doloribus.', 'stark.jacques@example.net', '2023-09-05 15:31:09', '$2y$10$8YIZm97NDApOYZB0zUIoBeXG.gPE3HcifCCgSkEIrkZRm/yCKg2Uq', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'cKwhkwHDVg', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
 (10, 'Dr. Juston Zboncak Jr.', '910-989-7086', '18-03-1971', 'male', 'Praesentium suscipit possimus minus asperiores.', 'johnston.leilani@example.org', '2023-09-05 15:31:09', '$2y$10$JMCtaZRLi1akNToWrv.UDOgvKuFsXyUTpNvfqwy4rEAPQ/vtL10XG', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'YuQ4D7ecGU', '2023-09-05 15:31:10', '2023-09-05 15:31:10'),
-(11, 'Hildegard Rolfson Sr.', '970.643.7081', '05-05-2015', 'male', 'Earum velit voluptatem aut corrupti perspiciatis.', 'iconnelly@example.net', '2023-09-05 15:31:10', '$2y$10$X5wj6quA0hpfGrwmybCAZ.GP1Q7aLZWh9smeTem4exif7SuKBTqbm', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'xZLQjEXwb6', '2023-09-05 15:31:10', '2023-09-05 15:31:10');
+(11, 'Hildegard Rolfson Sr.', '970.643.7081', '05-05-2015', 'male', 'Earum velit voluptatem aut corrupti perspiciatis.', 'iconnelly@example.net', '2023-09-05 15:31:10', '$2y$10$X5wj6quA0hpfGrwmybCAZ.GP1Q7aLZWh9smeTem4exif7SuKBTqbm', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'xZLQjEXwb6', '2023-09-05 15:31:10', '2023-09-07 16:57:46');
 
 -- --------------------------------------------------------
 
@@ -7082,7 +7092,40 @@ INSERT INTO `vouchers` (`id`, `customer`, `phone`, `voucher_number`, `total`, `t
 (6077, 'Prof. Renee Shanahan', '551-526-8604', 'tex8kl3ymj', 90460, 4523, 94983, 4, '2023-08-31 07:37:30', '2023-08-31 07:37:30'),
 (6078, 'Dr. Dedric Gusikowski', '+1-769-341-5607', 'if23192ysy', 55450, 2772.5, 58222.5, 4, '2023-08-31 07:10:06', '2023-08-31 07:10:06'),
 (6079, 'Princess White', '651.587.6756', 'c9ctfcjkmp', 115615, 5780.75, 121395.75, 9, '2023-08-31 04:37:17', '2023-08-31 04:37:17'),
-(6080, 'Agustina Moore V', '(641) 699-2454', 'vsfybnwhg7', 126451, 6322.55, 132773.55, 4, '2023-08-31 03:10:00', '2023-08-31 03:10:00');
+(6080, 'Agustina Moore V', '(641) 699-2454', 'vsfybnwhg7', 126451, 6322.55, 132773.55, 4, '2023-08-31 03:10:00', '2023-08-31 03:10:00'),
+(6081, 'Mama', '09-964470356', 'cl3oykl9is', 24900, 1245, 26145, 1, '2023-09-06 05:54:14', '2023-09-06 05:54:14'),
+(6082, 'Mama', '09-964470356', 'yprffwucor', 24900, 1245, 26145, 1, '2023-09-06 05:55:42', '2023-09-06 05:55:42'),
+(6083, 'Mama', '09-964470356', 'ii0dihgm4i', 24900, 1245, 26145, 1, '2023-09-06 05:58:16', '2023-09-06 05:58:16'),
+(6084, 'Mama', '09-964470356', 'capti8e26g', 24900, 1245, 26145, 1, '2023-09-06 05:59:33', '2023-09-06 05:59:33'),
+(6085, 'Mama', '09-964470356', 'd5vg9m4f69', 24900, 1245, 26145, 1, '2023-09-06 06:03:50', '2023-09-06 06:03:50'),
+(6086, 'Mama', '09-964470356', 'dnh5zygocv', 24900, 1245, 26145, 1, '2023-09-06 06:09:12', '2023-09-06 06:09:12'),
+(6087, 'Mama', '09-964470356', 'czugfovtt9', 24900, 1245, 26145, 1, '2023-09-06 06:09:31', '2023-09-06 06:09:31'),
+(6088, 'Mama', '09-964470356', 'bzcq9r8r4b', 24900, 1245, 26145, 1, '2023-09-06 06:52:15', '2023-09-06 06:52:15'),
+(6089, 'Mama', '09-964470356', 'f7yr4jol8h', 24900, 1245, 26145, 1, '2023-09-06 06:52:36', '2023-09-06 06:52:36'),
+(6090, 'Mama', '09-964470356', 'cveoanfl3m', 24900, 1245, 26145, 1, '2023-09-06 06:53:04', '2023-09-06 06:53:04'),
+(6091, 'Mama', '09-964470356', '4vw12ibcvc', 24900, 1245, 26145, 1, '2023-09-06 06:53:32', '2023-09-06 06:53:32'),
+(6092, 'Mama', '09-964470356', 'wdbxqb79nk', 24900, 1245, 26145, 1, '2023-09-06 06:53:58', '2023-09-06 06:53:58'),
+(6093, 'Mama', '09-964470356', 'ciyqe5oakt', 24900, 1245, 26145, 1, '2023-09-06 06:55:19', '2023-09-06 06:55:19'),
+(6094, 'Mama', '09-964470356', '23s5y1xbby', 24900, 1245, 26145, 1, '2023-09-06 06:55:36', '2023-09-06 06:55:36'),
+(6095, 'Mama', '09-964470356', 'vp5gn8sksb', 24900, 1245, 26145, 1, '2023-09-06 06:56:13', '2023-09-06 06:56:13'),
+(6096, 'Mama', '09-964470356', 'cvv4dd2ipx', 24900, 1245, 26145, 1, '2023-09-06 16:01:04', '2023-09-06 16:01:04'),
+(6097, 'Mama', '09-964470356', 'bs79ut6jl4', 24900, 1245, 26145, 1, '2023-09-06 16:03:23', '2023-09-06 16:03:23'),
+(6098, 'Mama', '09-964470356', 'ryeqlnbj1x', 24900, 1245, 26145, 1, '2023-09-06 16:04:12', '2023-09-06 16:04:12'),
+(6099, 'Mama', '09-964470356', 'atq1h6zkrn', 24900, 1245, 26145, 1, '2023-09-06 16:04:23', '2023-09-06 16:04:23'),
+(6100, 'Mama', '09-964470356', 'rrxuocmth5', 24900, 1245, 26145, 1, '2023-09-06 16:05:09', '2023-09-06 16:05:09'),
+(6101, 'Mama', '09-964470356', '8etdhmcfxj', 24900, 1245, 26145, 1, '2023-09-06 16:08:41', '2023-09-06 16:08:41'),
+(6102, 'Mama', '09-964470356', 'q6okyikypq', 24900, 1245, 26145, 1, '2023-09-06 16:13:18', '2023-09-06 16:13:18'),
+(6103, 'Mama', '09-964470356', 'xi9fozshne', 24900, 1245, 26145, 1, '2023-09-06 16:14:14', '2023-09-06 16:14:14'),
+(6104, 'Mama', '09-964470356', 'dmo88bownr', 24900, 1245, 26145, 1, '2023-09-06 16:15:15', '2023-09-06 16:15:15'),
+(6105, 'Mama', '09-964470356', 'smdopxvky9', 24900, 1245, 26145, 1, '2023-09-07 16:34:09', '2023-09-07 16:34:09'),
+(6106, 'Mama', '09-964470356', '75ugc60b0q', 24900, 1245, 26145, 1, '2023-09-12 15:34:42', '2023-09-12 15:34:42'),
+(6107, 'Mama', '09-964470356', 'ym2o6r237w', 24900, 1245, 26145, 1, '2023-09-14 16:53:20', '2023-09-14 16:53:20'),
+(6108, 'Mama', '09-964470356', 'atrradcz8s', 24900, 1245, 26145, 1, '2023-09-14 16:53:22', '2023-09-14 16:53:22'),
+(6109, 'Mama', '09-964470356', 'fseph9z7ux', 27740, 1387, 29127, 1, '2023-09-14 16:53:32', '2023-09-14 16:53:32'),
+(6110, 'Mama', '09-964470356', 'd5jgvpvjdg', 52930, 2646.5, 55576.5, 1, '2023-09-14 16:53:39', '2023-09-14 16:53:39'),
+(6111, 'Mama', '09-964470356', '8p46j8csln', 88480, 4424, 92904, 1, '2023-09-14 16:53:49', '2023-09-14 16:53:49'),
+(6112, 'Mama', '09-964470356', 'bjojirgnyb', 68706, 3435.3, 72141.3, 1, '2023-09-14 16:53:55', '2023-09-14 16:53:55'),
+(6113, 'Mama', '09-964470356', 'hd7cnrq7i3', 68706, 3435.3, 72141.3, 1, '2023-09-19 16:07:45', '2023-09-19 16:07:45');
 
 -- --------------------------------------------------------
 
@@ -25373,7 +25416,71 @@ INSERT INTO `voucher_records` (`id`, `voucher_id`, `product_id`, `price`, `quant
 (18237, 6079, 5, 2840, 1, 2840, '2023-08-31 04:37:17', '2023-08-31 04:37:17'),
 (18238, 6080, 6, 6963, 7, 48741, '2023-08-31 03:10:00', '2023-08-31 03:10:00'),
 (18239, 6080, 2, 4240, 7, 29680, '2023-08-31 03:10:00', '2023-08-31 03:10:00'),
-(18240, 6080, 1, 8005, 6, 48030, '2023-08-31 03:10:00', '2023-08-31 03:10:00');
+(18240, 6080, 1, 8005, 6, 48030, '2023-08-31 03:10:00', '2023-08-31 03:10:00'),
+(18241, 6081, 1, 8005, 2, 16010, '2023-09-06 05:54:14', '2023-09-06 05:54:14'),
+(18242, 6081, 3, 1778, 5, 8890, '2023-09-06 05:54:14', '2023-09-06 05:54:14'),
+(18243, 6082, 1, 8005, 2, 16010, '2023-09-06 05:55:42', '2023-09-06 05:55:42'),
+(18244, 6082, 3, 1778, 5, 8890, '2023-09-06 05:55:42', '2023-09-06 05:55:42'),
+(18245, 6083, 1, 8005, 2, 16010, '2023-09-06 05:58:16', '2023-09-06 05:58:16'),
+(18246, 6083, 3, 1778, 5, 8890, '2023-09-06 05:58:16', '2023-09-06 05:58:16'),
+(18247, 6084, 1, 8005, 2, 16010, '2023-09-06 05:59:33', '2023-09-06 05:59:33'),
+(18248, 6084, 3, 1778, 5, 8890, '2023-09-06 05:59:33', '2023-09-06 05:59:33'),
+(18249, 6085, 1, 8005, 2, 16010, '2023-09-06 06:03:50', '2023-09-06 06:03:50'),
+(18250, 6085, 3, 1778, 5, 8890, '2023-09-06 06:03:50', '2023-09-06 06:03:50'),
+(18251, 6086, 1, 8005, 2, 16010, '2023-09-06 06:09:12', '2023-09-06 06:09:12'),
+(18252, 6086, 3, 1778, 5, 8890, '2023-09-06 06:09:12', '2023-09-06 06:09:12'),
+(18253, 6087, 1, 8005, 2, 16010, '2023-09-06 06:09:31', '2023-09-06 06:09:31'),
+(18254, 6087, 3, 1778, 5, 8890, '2023-09-06 06:09:31', '2023-09-06 06:09:31'),
+(18255, 6088, 1, 8005, 2, 16010, '2023-09-06 06:52:15', '2023-09-06 06:52:15'),
+(18256, 6088, 3, 1778, 5, 8890, '2023-09-06 06:52:15', '2023-09-06 06:52:15'),
+(18257, 6089, 1, 8005, 2, 16010, '2023-09-06 06:52:36', '2023-09-06 06:52:36'),
+(18258, 6089, 3, 1778, 5, 8890, '2023-09-06 06:52:36', '2023-09-06 06:52:36'),
+(18259, 6090, 1, 8005, 2, 16010, '2023-09-06 06:53:04', '2023-09-06 06:53:04'),
+(18260, 6090, 3, 1778, 5, 8890, '2023-09-06 06:53:04', '2023-09-06 06:53:04'),
+(18261, 6091, 1, 8005, 2, 16010, '2023-09-06 06:53:32', '2023-09-06 06:53:32'),
+(18262, 6091, 3, 1778, 5, 8890, '2023-09-06 06:53:32', '2023-09-06 06:53:32'),
+(18263, 6092, 1, 8005, 2, 16010, '2023-09-06 06:53:58', '2023-09-06 06:53:58'),
+(18264, 6092, 3, 1778, 5, 8890, '2023-09-06 06:53:58', '2023-09-06 06:53:58'),
+(18265, 6093, 1, 8005, 2, 16010, '2023-09-06 06:55:19', '2023-09-06 06:55:19'),
+(18266, 6093, 3, 1778, 5, 8890, '2023-09-06 06:55:19', '2023-09-06 06:55:19'),
+(18267, 6094, 1, 8005, 2, 16010, '2023-09-06 06:55:36', '2023-09-06 06:55:36'),
+(18268, 6094, 3, 1778, 5, 8890, '2023-09-06 06:55:36', '2023-09-06 06:55:36'),
+(18269, 6095, 1, 8005, 2, 16010, '2023-09-06 06:56:13', '2023-09-06 06:56:13'),
+(18270, 6095, 3, 1778, 5, 8890, '2023-09-06 06:56:13', '2023-09-06 06:56:13'),
+(18271, 6097, 1, 8005, 2, 16010, '2023-09-06 16:03:23', '2023-09-06 16:03:23'),
+(18272, 6097, 3, 1778, 5, 8890, '2023-09-06 16:03:23', '2023-09-06 16:03:23'),
+(18273, 6098, 1, 8005, 2, 16010, '2023-09-06 16:04:12', '2023-09-06 16:04:12'),
+(18274, 6098, 3, 1778, 5, 8890, '2023-09-06 16:04:12', '2023-09-06 16:04:12'),
+(18275, 6099, 1, 8005, 2, 16010, '2023-09-06 16:04:23', '2023-09-06 16:04:23'),
+(18276, 6099, 3, 1778, 5, 8890, '2023-09-06 16:04:23', '2023-09-06 16:04:23'),
+(18277, 6100, 1, 8005, 2, 16010, '2023-09-06 16:05:09', '2023-09-06 16:05:09'),
+(18278, 6100, 3, 1778, 5, 8890, '2023-09-06 16:05:09', '2023-09-06 16:05:09'),
+(18279, 6101, 1, 8005, 2, 16010, '2023-09-06 16:08:41', '2023-09-06 16:08:41'),
+(18280, 6101, 3, 1778, 5, 8890, '2023-09-06 16:08:41', '2023-09-06 16:08:41'),
+(18281, 6102, 1, 8005, 2, 16010, '2023-09-06 16:13:18', '2023-09-06 16:13:18'),
+(18282, 6102, 3, 1778, 5, 8890, '2023-09-06 16:13:18', '2023-09-06 16:13:18'),
+(18283, 6103, 1, 8005, 2, 16010, '2023-09-06 16:14:14', '2023-09-06 16:14:14'),
+(18284, 6103, 3, 1778, 5, 8890, '2023-09-06 16:14:14', '2023-09-06 16:14:14'),
+(18285, 6104, 1, 8005, 2, 16010, '2023-09-06 16:15:15', '2023-09-06 16:15:15'),
+(18286, 6104, 3, 1778, 5, 8890, '2023-09-06 16:15:15', '2023-09-06 16:15:15'),
+(18287, 6105, 1, 8005, 2, 16010, '2023-09-07 16:34:09', '2023-09-07 16:34:09'),
+(18288, 6105, 3, 1778, 5, 8890, '2023-09-07 16:34:09', '2023-09-07 16:34:09'),
+(18289, 6106, 1, 8005, 2, 16010, '2023-09-12 15:34:42', '2023-09-12 15:34:42'),
+(18290, 6106, 3, 1778, 5, 8890, '2023-09-12 15:34:42', '2023-09-12 15:34:42'),
+(18291, 6107, 1, 8005, 2, 16010, '2023-09-14 16:53:20', '2023-09-14 16:53:20'),
+(18292, 6107, 3, 1778, 5, 8890, '2023-09-14 16:53:20', '2023-09-14 16:53:20'),
+(18293, 6108, 1, 8005, 2, 16010, '2023-09-14 16:53:22', '2023-09-14 16:53:22'),
+(18294, 6108, 3, 1778, 5, 8890, '2023-09-14 16:53:22', '2023-09-14 16:53:22'),
+(18295, 6109, 4, 9425, 2, 18850, '2023-09-14 16:53:32', '2023-09-14 16:53:32'),
+(18296, 6109, 3, 1778, 5, 8890, '2023-09-14 16:53:32', '2023-09-14 16:53:32'),
+(18297, 6110, 4, 9425, 2, 18850, '2023-09-14 16:53:39', '2023-09-14 16:53:39'),
+(18298, 6110, 5, 2840, 12, 34080, '2023-09-14 16:53:39', '2023-09-14 16:53:39'),
+(18299, 6111, 4, 9425, 2, 18850, '2023-09-14 16:53:49', '2023-09-14 16:53:49'),
+(18300, 6111, 6, 6963, 10, 69630, '2023-09-14 16:53:49', '2023-09-14 16:53:49'),
+(18301, 6112, 4, 9425, 2, 18850, '2023-09-14 16:53:55', '2023-09-14 16:53:55'),
+(18302, 6112, 7, 6232, 8, 49856, '2023-09-14 16:53:55', '2023-09-14 16:53:55'),
+(18303, 6113, 4, 9425, 2, 18850, '2023-09-19 16:07:45', '2023-09-19 16:07:45'),
+(18304, 6113, 7, 6232, 8, 49856, '2023-09-19 16:07:45', '2023-09-19 16:07:45');
 
 --
 -- Indexes for dumped tables
@@ -25489,7 +25596,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `photos`
@@ -25507,7 +25614,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `sale_records`
 --
 ALTER TABLE `sale_records`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=629;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=633;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -25531,13 +25638,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vouchers`
 --
 ALTER TABLE `vouchers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6081;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6114;
 
 --
 -- AUTO_INCREMENT for table `voucher_records`
 --
 ALTER TABLE `voucher_records`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18241;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18305;
 
 --
 -- Constraints for dumped tables
