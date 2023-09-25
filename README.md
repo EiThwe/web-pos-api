@@ -149,10 +149,14 @@ __Logout All Devices__ `POST`
 ## Sale 
 
 __Today Sale Overview__ `GET`
+```
 http://127.0.0.1:8000/api/v1/today-sale-overview
+```
 
 __Sale Overview [ Weekly,Monthly,Yearly ]__ `GET`
+```
 http://127.0.0.1:8000/api/v1/sale-overview/{type}
+```
 
 Parameter  |  Type  |  Status | Description 
 -----------|--------|---------|------------
@@ -161,15 +165,21 @@ type      | string | **Required**| weekly,monthly,yearly
 ## Stock 
 
 __Stock Overview__ `GET`
+```
 http://127.0.0.1:8000/api/v1/stock-overview
+```
 
 __Stock Overview List__ `GET`
+```
 http://127.0.0.1:8000/api/v1/stock-overview-list
+```
 
 ## Dashboard
 
 __Dashboard Overview [ Weekly,Monthly,Yearly ]__ `GET`
-http://127.0.0.1:8000/api/v1/dashboard-overview/{type
+```
+http://127.0.0.1:8000/api/v1/dashboard-overview/{type}
+```
 
 
 Parameter  |  Type  |  Status | Description 
