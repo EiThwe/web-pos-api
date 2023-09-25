@@ -83,11 +83,14 @@ Route::prefix("v1")->group(function () {
 
             // stock overview
             Route::get("stock-overview", [StockController::class, "stockOverview"]);
-            Route::get("stock-overview-list", [StockController::class, "stockOverviewList"]);
+            Route::get("stock-overview-lists", [StockController::class, "stockOverviewList"]);
 
             //sale overview
             Route::get("today-sale-overview", [SaleRecordController::class, "todaySaleOverview"]);
             Route::get("sale-overview/{type}", [SaleRecordController::class, "saleOverview"]);
+
+            //dashboard overview
+            Route::get("dashboard-overview/{type}", [SaleRecordController::class, "dashboardOverview"]);
         });
     });
     Route::post("login", [ApiAuthController::class, 'login']);

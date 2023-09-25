@@ -9,11 +9,16 @@ use App\Http\Resources\MonthlyRecordResource;
 use App\Http\Resources\TodaySaleOverviewResource;
 use App\Http\Resources\VoucherResource;
 use App\Http\Resources\YearlySaleRecordResource;
+use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Setting;
+use App\Models\User;
 use App\Models\Voucher;
+use App\Models\VoucherRecord;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SaleRecordController extends Controller
 {
@@ -215,11 +220,10 @@ class SaleRecordController extends Controller
         $top_3_vouchers = array_slice($vouchers, 0, 3);
 
         $top_3_vouchers = array_map(function ($voucher) use ($total_amount) {
-
             return [
                 "voucher_number" => $voucher["voucher_number"],
                 "net_total" => $voucher["net_total"],
-                "percentage" => round($voucher["total"] / $total_amount * 100, 1) . "%"
+                "percentage" => round($voucher["net_total"] / $total_amount * 100, 1) . "%"
             ];
         }, $top_3_vouchers);
 
@@ -257,11 +261,130 @@ class SaleRecordController extends Controller
 
         $min = $query2->where('total_net_total', $query2->min('total_net_total'))->select("total_net_total", "created_at")->first();
 
+
+        $product_sales = VoucherRecord::whereBetween("created_at", [$previousDate, $currentDate])
+            ->select('product_id', DB::raw('SUM(quantity) as total_quantity'))
+            ->groupBy('product_id')
+            ->orderBy("total_quantity", "desc")
+            ->limit(5)
+            ->get();
+        $product_sales = json_decode($product_sales, true);
+
+
+        $product_sales = array_map(function ($product_sale) {
+            $product = Product::find($product_sale["product_id"]);
+            return [
+                "product_name" => $product->name,
+                "brand" => $product->brand->name,
+                "sale_price" => $product->sale_price
+            ];
+        }, $product_sales);
+
+        $product_quantity = VoucherRecord::whereBetween("created_at", [$previousDate, $currentDate])
+            ->select('product_id', DB::raw('SUM(quantity) as total_quantity'))
+            ->groupBy('product_id')
+            ->get();
+
+        for ($i = 0; $i < count($product_quantity); $i++) {
+            $product = Product::find($product_quantity[$i]["product_id"]);
+            $product_quantity[$i]["brand_id"] = $product->brand_id;
+            $product_quantity[$i]["brand_name"] = Brand::find($product->brand_id)->name;
+        };
+
+
+        $product_quantity = json_decode($product_quantity, true);
+
+        $best_seller_brands = array();
+
+        foreach ($product_quantity as $item) {
+            $isExist = array_search($item["brand_id"], array_column($best_seller_brands, "brand_id"));
+
+            if (is_numeric($isExist)) {
+                $best_seller_brands[$isExist]["total_quantity"] += $item["total_quantity"];
+            } else {
+                array_push($best_seller_brands, [
+                    "brand_id" => $item["brand_id"],
+                    "brand_name" => $item["brand_name"],
+                    "total_quantity" => $item["total_quantity"]
+                ]);
+            }
+        }
+
+        usort($best_seller_brands, fn ($a, $b) => $b['total_quantity'] - $a['total_quantity']);
+
+        $best_seller_brands = array_slice($best_seller_brands, 0, 5);
+
+        $totalQuantity = 0;
+
+        foreach ($best_seller_brands as $item) {
+            $totalQuantity += $item['total_quantity'];
+        }
+
+        $best_seller_brands = array_map(function ($brands) use ($totalQuantity) {
+            $brands["percentage"] = round($brands["total_quantity"] / $totalQuantity * 100, 1) . "%";
+
+            return $brands;
+        }, $best_seller_brands);
+
         return response()->json([
             "average" => $average,
             "max" => $max,
             "min" => $min,
-            "records" => $records
+            "sale_records" => $records,
+            "product_sales" => $product_sales,
+            "brand_sales" => $best_seller_brands
+        ]);
+    }
+
+    public function dashboardOverview($type)
+    {
+        $currentDate = Carbon::now();
+        $previousDate = '';
+        $status = "daily";
+
+        if ($type == "weekly") {
+            $previousDate = Carbon::now()->subDays(7);
+        } else if ($type == "monthly") {
+            $previousDate = Carbon::now()->subDays(30);
+        } else if ($type == "yearly") {
+            $previousDate = Carbon::now()->subDays(365);
+            $status = "monthly";
+        } else {
+            return response()->json(["message" => "weekly or monthly or yearly is required"]);
+        }
+
+        $query = SaleRecord::whereBetween("created_at", [$previousDate, $currentDate])->where("status", $status);
+
+        $records = $query->select("total_net_total", "created_at")->get();
+        $products = Product::where("total_stock", ">=", 0)->get();
+        $total_stocks = $products->sum("total_stock");
+        $total_staff = User::where("id", "!=", 1)->count();
+
+        $voucher_records = VoucherRecord::whereBetween("created_at", [$previousDate, $currentDate])
+            ->select("product_id", DB::raw('SUM(quantity) as total_quantity'), DB::raw('SUM(cost) as total_cost'))
+            ->groupBy("product_id")
+            ->get();
+
+        $total_income = $voucher_records->sum("total_cost");
+        $total_expense = 0;
+
+        $voucher_records = json_decode($voucher_records, true);
+        foreach ($voucher_records as $record) {
+            $product = Product::find($record["product_id"]);
+            $total_expense += $product->actual_price * $record["total_quantity"];
+        }
+
+        $total_profit = $total_income - $total_expense;
+
+        return response()->json([
+            "total_stocks" => $total_stocks,
+            "total_staff" => $total_staff,
+            "sale_records" => $records,
+            "stats" => [
+                "total_income" => $total_income,
+                "total_expense" => $total_expense,
+                "total_profit" => $total_profit
+            ]
         ]);
     }
 }
