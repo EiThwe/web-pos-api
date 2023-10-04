@@ -9,17 +9,26 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
+    protected $keyName = "products";
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::latest("id")->paginate(10)->withQueryString();
-        return ProductResource::collection($products);
+        if (Cache::has($this->keyName)) {
+            $products = Cache::get($this->keyName);
+            return ProductResource::collection($products);
+        } else {
+            $products = Product::latest("id")->paginate(10)->withQueryString();
+
+            Cache::put($this->keyName, $products);
+            return ProductResource::collection($products);
+        }
     }
 
     /**
@@ -32,7 +41,6 @@ class ProductController extends Controller
             "brand_id" => $request->brand_id,
             "actual_price" => $request->actual_price,
             "sale_price" => $request->sale_price,
-            // "total_stock" => $request->total_stock,
             "user_id" => Auth::id(),
             "unit" => $request->unit,
             "more_information" => $request->more_information,

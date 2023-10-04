@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AddJsonHeaderMiddleware;
 use App\Http\Middleware\IsActiveUser;
+use App\Http\Middleware\IsQuantityExceed;
 use App\Http\Middleware\IsSaleClose;
 use App\Http\Middleware\IsSaleOpen;
 use App\Http\Middleware\MonthlyCloseMiddleware;
@@ -75,5 +76,6 @@ class Kernel extends HttpKernel
         "isSaleClose" => IsSaleClose::class,
         "isSaleOpen" => IsSaleOpen::class,
         "isMonthlyClose" => MonthlyCloseMiddleware::class,
+        "isQuantityExceed" => IsQuantityExceed::class
     ];
 }

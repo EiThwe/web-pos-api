@@ -84,8 +84,6 @@ class UserController extends Controller
                 "message" => "Unauthorized"
             ]);
         }
-
-
         $user = User::find($id);
         $user->status = "ban";
         $user->update();
@@ -100,8 +98,6 @@ class UserController extends Controller
                 "message" => "Unauthorized"
             ]);
         }
-
-
         $user = User::find($id);
         $user->status = "active";
         $user->update();

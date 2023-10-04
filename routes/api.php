@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\Overview\DashboardOverviewController;
+use App\Http\Controllers\Overview\SaleOverviewController;
+use App\Http\Controllers\Overview\StockOverviewController;
+use App\Http\Controllers\Overview\TodaySaleOverviewController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleRecordController;
@@ -71,7 +75,7 @@ Route::prefix("v1")->group(function () {
             Route::delete("media/{id}", [PhotoController::class, "destroy"]);
 
             Route::middleware("isSaleClose")->group(function () {
-                Route::post("checkout", [VoucherController::class, "checkout"]);
+                Route::post("checkout", [VoucherController::class, "checkout"])->middleware("isQuantityExceed");
                 Route::post("sale-close", [SaleRecordController::class, "saleClose"]);
                 Route::post("monthly-close", [SaleRecordController::class, "monthlyClose"])->middleware("isMonthlyClose");
             });
@@ -82,15 +86,15 @@ Route::prefix("v1")->group(function () {
             Route::post("sale-open", [SaleRecordController::class, "saleOpen"])->middleware("isSaleOpen");
 
             // stock overview
-            Route::get("stock-overview", [StockController::class, "stockOverview"]);
-            Route::get("stock-overview-lists", [StockController::class, "stockOverviewList"]);
+            Route::get("stock-overview", [StockOverviewController::class, "stockOverview"]);
+            Route::get("stock-overview-lists", [StockOverviewController::class, "stockOverviewList"]);
 
             //sale overview
-            Route::get("today-sale-overview", [SaleRecordController::class, "todaySaleOverview"]);
-            Route::get("sale-overview/{type}", [SaleRecordController::class, "saleOverview"]);
+            Route::get("today-sale-overview", [TodaySaleOverviewController::class, "todaySaleOverview"]);
+            Route::get("sale-overview/{type}", [SaleOverviewController::class, "saleOverview"]);
 
             //dashboard overview
-            Route::get("dashboard-overview/{type}", [SaleRecordController::class, "dashboardOverview"]);
+            Route::get("dashboard-overview/{type}", [DashboardOverviewController::class, "dashboardOverview"]);
         });
     });
     Route::post("login", [ApiAuthController::class, 'login']);

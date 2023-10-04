@@ -43,7 +43,7 @@ class PhotoController extends Controller
                     "url" => $photoUrl,
                     "name" => $fileName,
                     "ext" => $fileExt,
-                    "file_size" => $fileSizeBytes,
+                    "file_size" => $fileSizeMB,
                     "user_id" => Auth::id(),
                     "created_at" => now(),
                     "updated_at" => now(),
