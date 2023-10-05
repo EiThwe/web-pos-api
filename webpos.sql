@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Oct 04, 2023 at 05:42 PM
+-- Generation Time: Oct 05, 2023 at 06:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -142,6 +142,15 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, 'unknown', '7384fc610631238b90ca4f13b8f1b94cb9818dc64be546575ca01b216c4fa7ca', '[\"*\"]', '2023-10-04 17:47:20', NULL, '2023-10-04 17:11:52', '2023-10-04 17:47:20'),
+(2, 'App\\Models\\User', 1, 'unknown', '6739b5dae9d493c927b1d9b67b17e5f54cc0e9cd36b92a6bedf7f762ada243c6', '[\"*\"]', '2023-10-05 09:21:40', NULL, '2023-10-05 09:21:05', '2023-10-05 09:21:40'),
+(3, 'App\\Models\\User', 1, 'unknown', 'b9a47764e431f3fd280268243178dd461aa517eb26892fb61d7eb348a466ec74', '[\"*\"]', '2023-10-05 16:02:43', NULL, '2023-10-05 16:02:17', '2023-10-05 16:02:43');
 
 -- --------------------------------------------------------
 
@@ -996,8 +1005,8 @@ INSERT INTO `users` (`id`, `name`, `phone`, `date_of_birth`, `gender`, `address`
 (7, 'Isidro Carter MD', '1-505-421-2666', '10-06-2016', 'male', 'Totam dolores magni suscipit maxime et placeat et.', 'tremayne23@example.net', '2023-10-04 15:38:34', '$2y$10$nDku7CzanBqAvhhvGuannOFezOT8MZ7AmiRhZR0wfZu6I1aZ4nsUy', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'pEkxnrqY0u', '2023-10-04 15:38:34', '2023-10-04 15:38:34'),
 (8, 'Mrs. Cydney Grimes', '+19287049372', '26-10-1980', 'male', 'Temporibus itaque autem rerum aliquam.', 'winston34@example.net', '2023-10-04 15:38:34', '$2y$10$N4U29YML6p2HLQaq3UhvTe3BOTtYF2d4qXeJHJbblPIH7wBUbtkYq', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'AIyFyAQXbb', '2023-10-04 15:38:34', '2023-10-04 15:38:34'),
 (9, 'Adrianna Goyette', '762.593.3067', '14-01-1998', 'male', 'Quos enim vel expedita est inventore quos dicta.', 'boyer.katelynn@example.com', '2023-10-04 15:38:34', '$2y$10$vD3S0Lhmbr8lbHGre9dD5usz8KLor54fEtg9kPm8EQFQpsKsYuxt6', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'Gqe77WLT0o', '2023-10-04 15:38:34', '2023-10-04 15:38:34'),
-(10, 'Dr. Buster Sporer', '+1 (954) 615-5283', '27-11-2013', 'male', 'Quia dolores totam fuga dolor voluptatem non cumque voluptas.', 'burley09@example.com', '2023-10-04 15:38:34', '$2y$10$TV0S.iB2c.K1zEtiKaB1A.BUmByFxxQa3YyLev.3PHFfmfkAnHhKG', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', '5W5zPYnW1T', '2023-10-04 15:38:34', '2023-10-04 15:38:34'),
-(11, 'Thelma Marquardt', '+1-251-939-9494', '25-09-1998', 'male', 'Quasi et occaecati et dolorem molestias et.', 'wilhelmine.kunze@example.net', '2023-10-04 15:38:34', '$2y$10$CWYLjZenF8l3rnJwqmPKMOzaBhI/7FTAqYNmETOdsAd3cpvffwpt6', 'staff', 'active', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'XuQwn01B9B', '2023-10-04 15:38:34', '2023-10-04 15:38:34');
+(10, 'Dr. Buster Sporer', '+1 (954) 615-5283', '27-11-2013', 'male', 'Quia dolores totam fuga dolor voluptatem non cumque voluptas.', 'burley09@example.com', '2023-10-04 15:38:34', '$2y$10$TV0S.iB2c.K1zEtiKaB1A.BUmByFxxQa3YyLev.3PHFfmfkAnHhKG', 'staff', 'ban', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', '5W5zPYnW1T', '2023-10-04 15:38:34', '2023-10-04 17:13:45'),
+(11, 'Thelma Marquardt', '+1-251-939-9494', '25-09-1998', 'male', 'Quasi et occaecati et dolorem molestias et.', 'wilhelmine.kunze@example.net', '2023-10-04 15:38:34', '$2y$10$CWYLjZenF8l3rnJwqmPKMOzaBhI/7FTAqYNmETOdsAd3cpvffwpt6', 'staff', 'ban', 'https://t4.ftcdn.net/jpg/01/07/43/45/360_F_107434505_fRHwF9TpuagNggbH3Gn7FP972jsKI9Vn.jpg', 'XuQwn01B9B', '2023-10-04 15:38:34', '2023-10-04 17:13:32');
 
 -- --------------------------------------------------------
 
@@ -26886,7 +26895,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `photos`
