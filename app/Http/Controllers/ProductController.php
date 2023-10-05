@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductDetailResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -20,15 +21,26 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if (Cache::has($this->keyName)) {
-            $products = Cache::get($this->keyName);
-            return ProductResource::collection($products);
-        } else {
-            $products = Product::latest("id")->paginate(10)->withQueryString();
+        // if (Cache::has($this->keyName)) {
+        //     $products = Cache::get($this->keyName);
+        //     return ProductResource::collection($products);
+        // } else {
+            $products = Product::when(request()->has("search"), function ($query) {
+                $query->where(function (Builder $builder) {
+                    $search = request()->search;
 
-            Cache::put($this->keyName, $products);
+                    $builder->where("name", "like", "%" . $search . "%");
+                    $builder->orWhere("unit", "like", "%" . $search . "%");
+                    // $builder->orWhere("total_stock", "like", "%" . $search . "%");
+                });
+            })->when(request()->has('orderBy'), function ($query) {
+                $sortType = request()->sort ?? 'asc';
+                $query->orderBy(request()->orderBy, $sortType);
+            })->latest("id")->paginate(10)->withQueryString();
+
+            // Cache::put($this->keyName, $products);
             return ProductResource::collection($products);
-        }
+        // }
     }
 
     /**

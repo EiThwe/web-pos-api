@@ -7,6 +7,7 @@ use App\Http\Resources\StockOverviewListResource;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\VoucherRecord;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,7 +68,18 @@ class StockOverviewController extends Controller
 
     public function stockOverviewList()
     {
-        $products = Product::latest("id")->paginate(10)->withQueryString();
+        $products = Product::when(request()->has("search"), function ($query) {
+            $query->where(function (Builder $builder) {
+                $search = request()->search;
+
+                $builder->where("name", "like", "%" . $search . "%");
+                $builder->orWhere("unit", "like", "%" . $search . "%");
+                // $builder->orWhere("total_stock", "like", "%" . $search . "%");
+            });
+        })->when(request()->has('orderBy'), function ($query) {
+            $sortType = request()->sort ?? 'asc';
+            $query->orderBy(request()->orderBy, $sortType);
+        })->latest("id")->paginate(10)->withQueryString();
         return StockOverviewListResource::collection($products);
     }
 }

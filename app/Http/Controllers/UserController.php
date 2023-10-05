@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -21,7 +22,18 @@ class UserController extends Controller
         }
 
 
-        $users = User::whereNot("id", Auth::id())->where("status", "active")->latest("id")->paginate(10)->withQueryString();
+        $users = User::when(request()->has("search"), function ($query) {
+            $query->where(function (Builder $builder) {
+                $search = request()->search;
+
+                $builder->where("name", "like", "%" . $search . "%");
+                $builder->orWhere("role", "like", "%" . $search . "%");
+                $builder->orWhere("email", "like", "%" . $search . "%");
+            });
+        })->when(request()->has('orderBy'), function ($query) {
+            $sortType = request()->sort ?? 'asc';
+            $query->orderBy(request()->orderBy, $sortType);
+        })->whereNot("id", Auth::id())->where("status", "active")->latest("id")->paginate(10)->withQueryString();
         return response()->json(["users" => $users]);
     }
 
@@ -34,7 +46,18 @@ class UserController extends Controller
         }
 
 
-        $users = User::where("status", "ban")->latest("id")->paginate(10)->withQueryString();
+        $users = User::when(request()->has("search"), function ($query) {
+            $query->where(function (Builder $builder) {
+                $search = request()->search;
+
+                $builder->where("name", "like", "%" . $search . "%");
+                $builder->orWhere("role", "like", "%" . $search . "%");
+                $builder->orWhere("email", "like", "%" . $search . "%");
+            });
+        })->when(request()->has('orderBy'), function ($query) {
+            $sortType = request()->sort ?? 'asc';
+            $query->orderBy(request()->orderBy, $sortType);
+        })->where("status", "ban")->latest("id")->paginate(10)->withQueryString();
         return response()->json(["users" => $users]);
     }
 

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
+use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,21 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::latest("id")->paginate(10)->withQueryString();
+        $brands = Brand::when(request()->has("search"), function ($query) {
+            $query->where(function (Builder $builder) {
+                $search = request()->search;
+
+                $builder->where("name", "like", "%" . $search . "%");
+                $builder->orWhere("company", "like", "%" . $search . "%");
+                $builder->orWhere("agent", "like", "%" . $search . "%");
+                $builder->orWhere("phone", "like", "%" . $search . "%");
+                $builder->orWhere("information", "like", "%" . $search . "%");
+                // $builder->orWhere("total_stock", "like", "%" . $search . "%");
+            });
+        })->when(request()->has('orderBy'), function ($query) {
+            $sortType = request()->sort ?? 'asc';
+            $query->orderBy(request()->orderBy, $sortType);
+        })->latest("id")->paginate(10)->withQueryString();
         return  BrandResource::collection($brands);
     }
 
