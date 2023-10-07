@@ -85,7 +85,7 @@ _Only Admin can see these routes_
 __Get Users__ `GET`
 
 ```
- http://127.0.0.1:8000/api/v1/users?page={id}
+ http://127.0.0.1:8000/api/v1/users?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
 
 __Get Single User__ `GET`
@@ -128,7 +128,7 @@ __Ban User__ `PATCH`
 __Ban User List__ `GET`
 
 ```
- http://127.0.0.1:8000/api/v1/ban-users
+ http://127.0.0.1:8000/api/v1/ban-users?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
 
 ### Devices and Log out
@@ -171,7 +171,7 @@ http://127.0.0.1:8000/api/v1/stock-overview
 
 __Stock Overview List__ `GET`
 ```
-http://127.0.0.1:8000/api/v1/stock-overview-list
+http://127.0.0.1:8000/api/v1/stock-overview-list?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
 
 ## Dashboard
@@ -212,10 +212,10 @@ photos      |file array | **Required**| []
 
 ### Brand
 
-__Get Products__ `GET`
+__Get Brands__ `GET`
 
 ```
- http://127.0.0.1:8000/api/v1/brands?page={id}
+ http://127.0.0.1:8000/api/v1/brands?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
 
 __Get Single Brand__ `GET`
@@ -267,7 +267,7 @@ _Only admin can delete_
 __Get Products__ `GET`
 
 ```
- http://127.0.0.1:8000/api/v1/products?page={id}
+ http://127.0.0.1:8000/api/v1/products?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
 
 __Get Single Product__ `GET`
