@@ -63,7 +63,15 @@ class StockOverviewController extends Controller
         }
 
         usort($bestSellerBrands, fn ($a, $b) => $b['total_quantity'] - $a['total_quantity']);
-        return array_slice($bestSellerBrands, 0, 5);
+        $bestFiveBrands = array_slice($bestSellerBrands, 0, 5);
+        $totalQuantity = array_sum(array_column($bestFiveBrands, 'total_quantity'));
+
+        // Calculate and add percentage to the array
+        foreach ($bestFiveBrands as &$brand) {
+            $percentage = ($brand['total_quantity'] / $totalQuantity) * 100;
+            $brand['percentage'] = round($percentage, 1) . "%";
+        }
+        return $bestFiveBrands;
     }
 
     public function stockOverviewList()
