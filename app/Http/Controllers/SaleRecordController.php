@@ -33,11 +33,15 @@ class SaleRecordController extends Controller
     public function saleClose()
     {
         try {
+
+
             DB::beginTransaction();
             $setting = Setting::find(1);
             $setting->update(["status" => "close"]);
 
             $today = Carbon::today();
+            
+
             $vouchers = Voucher::whereDate("created_at", $today)->get();
             $total_cash = $vouchers->sum("total");
             $total_tax = $vouchers->sum("tax");
@@ -49,7 +53,8 @@ class SaleRecordController extends Controller
                 "total_tax" => $total_tax,
                 "total_net_total" => $total_net_total,
                 "total_vouchers" => $total_vouchers,
-                "user_id" => Auth::id()
+                "user_id" => Auth::id(),
+                "status" => "daily"
             ]);
             DB::commit();
             return response()->json(["message" => "shop is close"], 200);
@@ -68,6 +73,11 @@ class SaleRecordController extends Controller
         }
         try {
             DB::beginTransaction();
+            $setting = Setting::find(1);
+            $setting->update(["status" => "close"]);
+
+
+
             $query = SaleRecord::where("status", "daily")
                 ->whereMonth("created_at", request()->month)
                 ->whereYear("created_at", request()->year);

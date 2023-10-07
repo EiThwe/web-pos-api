@@ -75,8 +75,8 @@ Route::prefix("v1")->group(function () {
             Route::delete("media/{id}", [PhotoController::class, "destroy"]);
 
             Route::middleware("isSaleClose")->group(function () {
-                Route::post("checkout", [VoucherController::class, "checkout"])->middleware("isQuantityExceed");
-                Route::post("sale-close", [SaleRecordController::class, "saleClose"]);
+                Route::post("checkout", [VoucherController::class, "checkout"])->middleware("isTodayRecordExist")->middleware("isQuantityExceed");
+                Route::post("sale-close", [SaleRecordController::class, "saleClose"])->middleware("isTodayRecordExist");
                 Route::post("monthly-close", [SaleRecordController::class, "monthlyClose"])->middleware("isMonthlyClose");
             });
 

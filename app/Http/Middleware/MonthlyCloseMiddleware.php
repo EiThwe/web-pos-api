@@ -23,7 +23,7 @@ class MonthlyCloseMiddleware
             ->whereYear("created_at", request()->year)->first();
 
         if ($isMonthlyClose) {
-            return response()->json(["message" => "monthly record has already existed"]);
+            return response()->json(["message" => "monthly record has already existed"],400);
         }
 
         return $next($request);

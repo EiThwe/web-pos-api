@@ -31,7 +31,7 @@ class StockSeeder extends Seeder
             $currentProduct->update();
         }
 
-        Setting::create(["status" => "open"]);
+        Setting::create(["status" => "close"]);
         Stock::insert($stocks);
     }
 }

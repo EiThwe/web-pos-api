@@ -40,7 +40,8 @@ class SaleOverviewController extends Controller
         $best_seller_brands = $this->getBestSellerBrands($dates);
 
         return response()->json([
-            "average" => $average,
+            "average" => round($average, 1),
+            "totalSale"=>$recordsTotal,
             "max" => [
                 "total_net_total" => $maxValue,
                 "percentage" => round($maxPercentage, 1) . "%",

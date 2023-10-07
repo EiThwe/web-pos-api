@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->enum("status", ["open", "close"])->default("open");
+            $table->enum("status", ["close", "open"])->default("close");
             $table->timestamps();
         });
     }
