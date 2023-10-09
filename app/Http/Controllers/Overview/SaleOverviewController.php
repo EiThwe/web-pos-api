@@ -19,11 +19,15 @@ class SaleOverviewController extends Controller
         $status = ($type == "yearly") ? "monthly" : "daily";
 
 
-        $query = SaleRecord::whereBetween("created_at", $dates)->where("status", $status);
+        $query = SaleRecord::whereBetween("created_at", $dates)->where("status", $status)->distinct();
         // dd($query);
-        $query2 = SaleRecord::whereBetween("created_at", $dates)->where("status", $status);
+        $query2 = SaleRecord::whereBetween("created_at", $dates)->where("status", $status)->distinct();
 
         $average = $query->avg("total_net_total");
+
+        if (!$average) {
+            return response()->json(["message" => "There is no data"]);
+        }
         $records = $query->select("total_net_total", "created_at")->get();
         // dd($records);
         $max = $this->getMinMaxRecord($query, 'max');
@@ -41,7 +45,7 @@ class SaleOverviewController extends Controller
 
         return response()->json([
             "average" => round($average, 1),
-            "totalSale"=>$recordsTotal,
+            "totalSale" => $recordsTotal,
             "max" => [
                 "total_net_total" => $maxValue,
                 "percentage" => round($maxPercentage, 1) . "%",
