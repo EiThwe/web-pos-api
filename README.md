@@ -87,6 +87,11 @@ __Get Users__ `GET`
 ```
  http://127.0.0.1:8000/api/v1/users?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
+Parameter  |  Type  | Description 
+-----------|--------|------------
+search     | string | name,role,email(searable)
+orderBy     | string | name,address,email,role
+sort     | string | asc,desc
 
 __Get Single User__ `GET`
 
@@ -124,12 +129,16 @@ __Ban User__ `PATCH`
 ```
  http://127.0.0.1:8000/api/v1/users/{id}/ban
 ```
-
 __Ban User List__ `GET`
 
 ```
  http://127.0.0.1:8000/api/v1/ban-users?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
+Parameter  |  Type  | Description 
+-----------|--------|------------
+search     | string | name,role,email(searable)
+orderBy     | string | name,address,email,role
+sort     | string | asc,desc
 
 ### Devices and Log out
 
@@ -173,6 +182,11 @@ __Stock Overview List__ `GET`
 ```
 http://127.0.0.1:8000/api/v1/stock-overview-list?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
+Parameter  |  Type  | Description 
+-----------|--------|------------
+search     | string | name,unit(searable)
+orderBy     | string | name,sale_price,total_stock,unit
+sort     | string | asc,desc
 
 ## Dashboard
 
@@ -217,6 +231,11 @@ __Get Brands__ `GET`
 ```
  http://127.0.0.1:8000/api/v1/brands?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
+Parameter  |  Type  | Description 
+-----------|--------|------------
+search     | string | name,company,agent,phone,information(searable)
+orderBy     | string | name,company,agent,phone,information
+sort     | string | asc,desc
 
 __Get Single Brand__ `GET`
 
@@ -269,6 +288,11 @@ __Get Products__ `GET`
 ```
  http://127.0.0.1:8000/api/v1/products?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
+Parameter  |  Type  | Description 
+-----------|--------|------------
+search     | string | name,unit(searable)
+orderBy     | string | name,actual_price,sale_price,total_stock,unit,more_information
+sort     | string | asc,desc
 
 __Get Single Product__ `GET`
 
