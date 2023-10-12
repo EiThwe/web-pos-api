@@ -300,6 +300,20 @@ __Get Single Product__ `GET`
  http://127.0.0.1:8000/api/v1/products/{id}
 ```
 
+__Get Stock History By Product Id__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/stock-history/{productId}
+```
+
+__Get Sale History By Product Id__ `GET`
+
+```
+ http://127.0.0.1:8000/api/v1/sale-history/{productId}
+```
+
+
+
 __Create Product__ `POST`
 
 ```
