@@ -20,7 +20,7 @@ class StockOverviewListResource extends JsonResource
             $stock_level = "instock";
         } else if ($this->total_stock <= 0) {
             $stock_level = "out of stock";
-        } else if ($this->total_stock <= 10) {
+        } else if ($this->total_stock <= 10 && $this->total_stock !== 0) {
             $stock_level = "low stock";
         }
 

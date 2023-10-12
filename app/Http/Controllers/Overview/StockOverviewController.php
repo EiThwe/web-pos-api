@@ -18,9 +18,22 @@ class StockOverviewController extends Controller
         $totalProducts = Product::count();
         $totalBrands = Brand::count();
 
-        $instock = $this->generateStockPercentage(">", 10, $totalProducts);
-        $lowStock = $this->generateStockPercentage("<=", 10, $totalProducts);
-        $outOfStock = $this->generateStockPercentage("==", 0, $totalProducts);
+        // $instock = $this->generateStockPercentage(">", 10, $totalProducts);
+        // $lowStock = $this->generateStockPercentage("<=", 10, $totalProducts);
+        // $outOfStock = $this->generateStockPercentage("==", 0, $totalProducts);
+
+        $instockData = $this->generateStockPercentage($totalProducts, ">", 0, ">", 10);
+        $lowStockData = $this->generateStockPercentage($totalProducts, ">", 0, "<=", 10);
+        $outOfStockData = $this->generateStockPercentage($totalProducts, "==", 0, "==", 0);
+
+        $instockCount = $instockData['count'];
+        $instockPercentage = $instockData['percentage'];
+
+        $lowStockCount = $lowStockData['count'];
+        $lowStockPercentage = $lowStockData['percentage'];
+
+        $outOfStockCount = $outOfStockData['count'];
+        $outOfStockPercentage = $outOfStockData['percentage'];
 
         $productQuantity = VoucherRecord::select('product_id', DB::raw('SUM(quantity) as total_quantity'))
             ->groupBy('product_id')
@@ -31,16 +44,29 @@ class StockOverviewController extends Controller
         return response()->json([
             "total_products" => $totalProducts,
             "total_brands" => $totalBrands,
-            "overview" => ["instock" => $instock, "low_stock" => $lowStock, "out_of_stock" => $outOfStock],
+
+            "overview" => ["instockCount" => $instockCount, "lowStockCount" => $lowStockCount, "outOfStockCount" => $outOfStockCount, "instock" => $instockPercentage, "low_stock" => $lowStockPercentage, "out_of_stock" => $outOfStockPercentage],
             "best_seller_brands" => $bestSellerBrands
         ], 200);
     }
 
-    private function generateStockPercentage($operator, $value, $totalProducts)
+    // private function generateStockPercentage($operator, $value, $totalProducts)
+    // {
+    //     $count = Product::where('total_stock', $operator, $value)->count();
+    //     return round(($count / $totalProducts) * 100, 2);
+    // }
+
+    private function generateStockPercentage($totalProducts, $operator1, $value1, $operator2, $value2)
     {
-        $count = Product::where('total_stock', $operator, $value)->count();
-        return round(($count / $totalProducts) * 100, 2);
+        $count = Product::where('total_stock', $operator1, $value1)
+            ->where('total_stock', $operator2, $value2)
+            ->count();
+
+        $percentage = round(($count / $totalProducts) * 100, 2);
+
+        return ['count' => $count, 'percentage' => $percentage];
     }
+
 
     private function calculateBestSellerBrands($productQuantity)
     {
