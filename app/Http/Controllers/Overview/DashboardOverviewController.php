@@ -37,28 +37,10 @@ class DashboardOverviewController extends Controller
         ]);
     }
 
-    // private function getPreviousDate($type)
-    // {
-    //     $previousDate = Carbon::now();
-
-    //     switch ($type) {
-    //         case "weekly":
-    //             $previousDate->subWeek();
-    //             break;
-    //         case "monthly":
-    //             $previousDate->subMonth();
-    //             break;
-    //         case "yearly":
-    //             $previousDate->subYear();
-    //             break;
-    //     }
-
-    //     return $previousDate;
-    // }
 
     private function calculateDateRange($type)
     {
-        $currentDate = Carbon::now();;
+        $currentDate = Carbon::now();
         $startDate = '';
         $endDate = '';
 
