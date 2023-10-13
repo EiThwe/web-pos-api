@@ -6,7 +6,11 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductDetailResource;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\SaleHistoryResource;
+use App\Http\Resources\StockHistoryResource;
 use App\Models\Product;
+use App\Models\Stock;
+use App\Models\VoucherRecord;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,21 +29,21 @@ class ProductController extends Controller
         //     $products = Cache::get($this->keyName);
         //     return ProductResource::collection($products);
         // } else {
-            $products = Product::when(request()->has("search"), function ($query) {
-                $query->where(function (Builder $builder) {
-                    $search = request()->search;
+        $products = Product::when(request()->has("search"), function ($query) {
+            $query->where(function (Builder $builder) {
+                $search = request()->search;
 
-                    $builder->where("name", "like", "%" . $search . "%");
-                    $builder->orWhere("unit", "like", "%" . $search . "%");
-                    // $builder->orWhere("total_stock", "like", "%" . $search . "%");
-                });
-            })->when(request()->has('orderBy'), function ($query) {
-                $sortType = request()->sort ?? 'asc';
-                $query->orderBy(request()->orderBy, $sortType);
-            })->latest("id")->paginate(10)->withQueryString();
+                $builder->where("name", "like", "%" . $search . "%");
+                $builder->orWhere("unit", "like", "%" . $search . "%");
+                // $builder->orWhere("total_stock", "like", "%" . $search . "%");
+            });
+        })->when(request()->has('orderBy'), function ($query) {
+            $sortType = request()->sort ?? 'asc';
+            $query->orderBy(request()->orderBy, $sortType);
+        })->latest("id")->paginate(10)->withQueryString();
 
-            // Cache::put($this->keyName, $products);
-            return ProductResource::collection($products);
+        // Cache::put($this->keyName, $products);
+        return ProductResource::collection($products);
         // }
     }
 
@@ -72,7 +76,8 @@ class ProductController extends Controller
                 "message" => "Product not found"
             ], 404);
         }
-        return new ProductDetailResource($product);
+
+        return  new ProductDetailResource($product);
     }
 
     /**

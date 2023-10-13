@@ -95,6 +95,10 @@ Route::prefix("v1")->group(function () {
 
             //dashboard overview
             Route::get("dashboard-overview/{type}", [DashboardOverviewController::class, "dashboardOverview"]);
+
+            //history
+            Route::get("stock-history/{productId}", [StockController::class, "stockHistory"]);
+            Route::get("sale-history/{productId}", [SaleRecordController::class, "saleHistory"]);
         });
     });
     Route::post("login", [ApiAuthController::class, 'login']);
