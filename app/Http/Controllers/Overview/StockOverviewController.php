@@ -24,7 +24,7 @@ class StockOverviewController extends Controller
 
         $instockData = $this->generateStockPercentage($totalProducts, ">", 0, ">", 10);
         $lowStockData = $this->generateStockPercentage($totalProducts, ">", 0, "<=", 10);
-        $outOfStockData = $this->generateStockPercentage($totalProducts, "==", 0, "==", 0);
+        $outOfStockData = $this->generateStockPercentage($totalProducts, "<", 0, "==", 0);
 
         $instockCount = $instockData['count'];
         $instockPercentage = $instockData['percentage'];
