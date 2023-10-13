@@ -69,7 +69,7 @@ class DashboardOverviewController extends Controller
     {
         return SaleRecord::whereBetween("created_at", [$startDate, $endDate])
             ->where("status", $status)
-            ->select("total_net_total", "created_at")
+            ->select("total_cash", "created_at")
             ->get();
     }
 
