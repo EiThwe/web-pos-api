@@ -19,13 +19,16 @@ class IsQuantityExceed
         $voucher_records = $request->voucher_records;
         $productIds = array_map(fn ($record) => $record["product_id"], $voucher_records);
 
-        $products = Product::where("id", $productIds)->get();
+        $products = Product::whereIn("id", $productIds)->get();
+        // $products = json_decode($products, true);
         logger($products);
 
         foreach ($products as $product) {
-            $record = array_filter($voucher_records, fn ($rec) => $rec["product_id"] == $product->id);
+            $record = array_values(array_filter($voucher_records, function ($rec) use ($product) {
+                return $rec["product_id"] == $product->id;
+            }))[0];
 
-            if ($product->total_stock < $record[0]["quantity"]) {
+            if ($product->total_stock < $record["quantity"]) {
                 return response()->json(["message" => "quantity exceed"], 400);
             }
         }
