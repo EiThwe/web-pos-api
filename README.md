@@ -180,7 +180,7 @@ http://127.0.0.1:8000/api/v1/stock-overview
 
 __Stock Overview List__ `GET`
 ```
-http://127.0.0.1:8000/api/v1/stock-overview-list?page={id}&search={search}&orderBy={name}&sort={asc}
+http://127.0.0.1:8000/api/v1/stock-overview-lists?page={id}&search={search}&orderBy={name}&sort={asc}
 ```
 Parameter  |  Type  | Description 
 -----------|--------|------------
